@@ -12,17 +12,21 @@
      Se billeder-guide.md for formater. */
 
   /* Forsiden */
-  --img-facade:  url("billeder/facade-hero.jpg");      /* Hero: åben dør, illy-skilt */
-  --img-plate1:  url("billeder/antipasti.jpg");        /* Antipasti-tallerken */
-  --img-plate2:  url("billeder/vafler.jpg");           /* Tre vafler med gelato */
-  --img-inside:  url("billeder/interioer.jpg");        /* Caféen indenfor */
-  --img-team:    url("billeder/giacomo-eleonora.jpg"); /* Giacomo og Eleonora */
-  --img-visit:   url("billeder/facade-skilt.jpg");     /* Facaden med ChokoGladE-skiltet */
+  --img-hero:    url("billeder/hero-emblem.jpg");      /* Hero: caféen indefra, mørklagt bag emblemet */
+  --img-plate1:  url("billeder/antipasti.jpg");        /* Galleri: antipasti-tallerkenen */
+  --img-plate2:  url("billeder/vafler.jpg");           /* Galleri: tre vafler med gelato */
+  --img-inside:  url("billeder/interioer.jpg");        /* Galleri: caféen indenfor */
+  --img-team:    url("billeder/giacomo-eleonora.jpg"); /* Historien: Eleonora og Giacomo */
+  --img-visit:   url("billeder/facade-sommer.jpg");    /* Besøg os: facaden, 1:1, sommergraderet */
 
   /* Menukortet */
   --img-vaffel:  url("billeder/vaffel.jpg");           /* Vaffel med gelato, tæt på */
-  --img-kaffe:   url("billeder/kaffe.jpg");            /* Cappuccino og vaffel på bordet */
+  --img-kaffe:   url("billeder/kaffe.jpg");            /* Cappuccino ved bordet */
   --img-choko:   url("billeder/chokoladehylder.jpg");  /* Chokoladehylderne */
+
+  /* Ligger i mappen, men bruges ikke direkte:
+       facade-hero.jpg   originalen som facade-sommer.jpg er skåret ud af
+       facade-skilt.jpg  facaden med hele ChokoGladE-skiltet */
 
   /* ---- Farver ---- */
   --cocoa:   #3B2314;
@@ -82,24 +86,43 @@ section{padding:76px 0}
   backdrop-filter:saturate(150%) blur(8px);
   border-bottom:1px solid rgba(176,141,87,.28);
 }
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:11px;padding-bottom:11px}
-.brand{font-family:var(--serif);color:var(--cream);font-size:1.65rem;letter-spacing:.01em;text-decoration:none;white-space:nowrap;line-height:1}
+/* Navn til venstre, navigation i midten, sprog til højre */
+.topbar .wrap{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:20px;
+  padding-top:14px;padding-bottom:14px;
+}
+/* Mærket til venstre, navnet ved siden af */
+.brand{
+  display:flex;align-items:center;gap:13px;
+  text-decoration:none;justify-self:start;
+}
+.brand img{width:52px;height:52px;flex:none}
+.brand-navn{
+  font-family:var(--serif);color:var(--cream);
+  font-size:1.55rem;letter-spacing:.01em;line-height:1;
+  white-space:nowrap;
+}
 .brand b{color:var(--gold-l);font-weight:400}
-.topbar-right{display:flex;align-items:center;gap:8px}
+.brand small{
+  display:block;font-family:var(--sans);
+  font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,239,230,.6);margin-top:5px;
+}
 
-/* Sidenavigation i toppen */
-.nav a{
-  display:inline-block;text-decoration:none;
-  font-size:.88rem;font-weight:600;
-  color:rgba(245,239,230,.8);
-  padding:7px 13px;border-radius:999px;
-  border:1.5px solid rgba(176,141,87,.45);
+.mainnav{display:flex;gap:6px;justify-self:center}
+.mainnav a{
+  text-decoration:none;color:rgba(245,239,230,.82);
+  font-size:.94rem;padding:7px 15px;border-radius:3px;
+  border-bottom:2px solid transparent;
   transition:.18s;white-space:nowrap;
 }
-.nav a:hover{color:var(--cocoa-d);background:var(--gold);border-color:var(--gold)}
-.nav a[aria-current="page"]{color:var(--cocoa-d);background:var(--gold);border-color:var(--gold)}
+.mainnav a:hover{color:var(--cream)}
+.mainnav a[aria-current="page"]{color:var(--cream);border-bottom-color:var(--gold)}
 
-.langs{display:flex;gap:2px;background:rgba(245,239,230,.09);border-radius:999px;padding:3px}
+.langs{justify-self:end;display:flex;gap:2px;background:rgba(245,239,230,.09);border-radius:999px;padding:3px}
 .langs button{
   font:inherit;font-size:.76rem;font-weight:600;letter-spacing:.06em;
   border:0;background:transparent;color:rgba(245,239,230,.62);
@@ -115,31 +138,68 @@ section{padding:76px 0}
   padding:15px 28px;border-radius:3px;border:1.5px solid transparent;
   transition:.18s;white-space:nowrap;
 }
-.btn-gold{background:var(--gold);color:var(--cocoa-d)}
-.btn-gold:hover{background:var(--gold-l)}
-.btn-ghost{border-color:rgba(245,239,230,.45);color:var(--cream)}
-.btn-ghost:hover{border-color:var(--cream);background:rgba(245,239,230,.09)}
 .btn-dark{background:var(--cocoa);color:var(--cream)}
 .btn-dark:hover{background:var(--cocoa-d)}
 
-/* ---- Hero (forsiden) ---- */
-.hero{position:relative;background:var(--cocoa-d);color:var(--cream);overflow:hidden;padding:0}
-.hero-grid{display:grid;grid-template-columns:1fr;gap:0}
-.hero-copy{padding:64px 0 68px;position:relative;z-index:2}
-.hero h1{color:var(--cream)}
-.hero h1 em{font-style:normal;color:var(--gold-l)}
+/* ---- Hero: fuldskærmsbillede med emblem henover ----
+   Højden er skærmen minus topbaren. Topbarens højde måles af
+   sprog.js og lægges i --topbar-h, så det passer uanset
+   skriftstørrelse, sprog og skærmbredde. Tallet nedenfor er
+   kun et skøn, hvis JavaScript er slået fra. */
+.hero{
+  position:relative;
+  min-height:calc(100vh - var(--topbar-h, 84px));
+  min-height:calc(100svh - var(--topbar-h, 84px));
+  display:flex;align-items:center;justify-content:center;
+  padding:56px 24px 96px;
+  background-color:#1B0D06;
+  background-image:var(--img-hero);
+  background-size:cover;
+  background-position:center;
+  overflow:hidden;
+}
+/* Mørkt slør, så emblemet altid kan læses, uanset hvor lyst
+   billedet er. Ligger som ::after, så det ikke kræver et
+   ekstra element i HTML'en. */
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:rgba(26,12,6,.34);
+}
+.emblem{
+  position:relative;z-index:2;
+  width:clamp(270px,52vmin,470px);height:auto;
+  color:var(--cream);
+  filter:drop-shadow(0 3px 26px rgba(15,7,3,.75));
+}
+/* Lille pil der viser at der er mere nedenfor */
+.scrollcue{
+  position:absolute;left:50%;bottom:30px;transform:translateX(-50%);
+  z-index:2;color:rgba(245,239,230,.72);text-decoration:none;
+  font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  transition:.2s;
+}
+.scrollcue:hover{color:var(--cream)}
+/* Kun den FØRSTE span er stregen. Den anden er teksten. */
+.scrollcue span:first-child{
+  display:block;width:1px;height:30px;
+  background:linear-gradient(rgba(245,239,230,.7),rgba(245,239,230,0));
+}
+
+/* ---- Kort intro lige under heroen ----
+   Ingen bundpolstring: sektionen nedenunder har sin egen, og
+   ellers står der dobbelt luft imellem. */
+.introduktion{background:var(--cream);text-align:center;padding-bottom:0}
+.introduktion .wrap{max-width:62ch}
+.introduktion p{font-size:1.16rem;color:var(--muted);margin:0 0 30px}
+.introduktion .hero-cta{justify-content:center}
+
 .kicker{
   font-size:.78rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
   color:var(--gold-l);margin:0 0 20px;
 }
-.hero-lede{font-size:1.16rem;color:rgba(245,239,230,.82);max-width:46ch;margin:22px 0 34px}
+.introduktion .kicker{color:var(--gold)}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px}
-.hero-img{
-  position:relative;min-height:300px;
-  background-color:#1B0D06;
-  background-image:var(--img-facade);
-  background-size:cover;background-position:center;
-}
 
 /* ---- Sidehoved (menukortet) ---- */
 .pagehead{position:relative;background:var(--cocoa-d);color:var(--cream);padding:66px 0 60px;overflow:hidden}
@@ -147,26 +207,6 @@ section{padding:76px 0}
 .pagehead h1{color:var(--cream);font-size:clamp(2.2rem,6vw,3.6rem)}
 .pagehead p{color:rgba(245,239,230,.78);max-width:52ch;margin:18px 0 0;font-size:1.08rem}
 
-/* ---- Billed-placeholder ---- */
-.ph{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:20px;
-  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:rgba(176,141,87,.85);
-  background:
-    repeating-linear-gradient(-45deg, rgba(176,141,87,.07) 0 12px, transparent 12px 24px),
-    #241109;
-  border:1px dashed rgba(176,141,87,.4);
-}
-.ph.light{
-  color:rgba(59,35,20,.5);
-  background:
-    repeating-linear-gradient(-45deg, rgba(59,35,20,.05) 0 12px, transparent 12px 24px),
-    var(--cream-d);
-  border-color:rgba(59,35,20,.22);
-}
-.ph[hidden]{display:none}
 
 /* ---- Sektionshoved ---- */
 .section-head{max-width:56ch;margin-bottom:44px}
@@ -237,21 +277,13 @@ section{padding:76px 0}
 .strip .s3{background-image:var(--img-choko)}
 
 
-/* ---- Historien ---- */
-.story{background:var(--cocoa);color:var(--cream);position:relative;overflow:hidden}
+/* ---- Historien ----
+   Samme mørke farve som hero og topbar (--cocoa-d), ikke den
+   lysere --cocoa. Ellers ser de tre mørke felter forskellige ud. */
+.story{background:var(--cocoa-d);color:var(--cream);position:relative;overflow:hidden}
 .story h2{color:var(--cream)}
 .story-grid{display:grid;grid-template-columns:1fr;gap:40px;position:relative;z-index:2}
 .story-text p{color:rgba(245,239,230,.82)}
-.quote{
-  font-family:var(--serif);font-size:1.3rem;line-height:1.5;
-  color:var(--gold-l);border-left:2px solid var(--gold);
-  padding-left:22px;margin:28px 0 0;
-}
-.quote cite{
-  display:block;font-family:var(--sans);font-style:normal;
-  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(245,239,230,.5);margin-top:12px;
-}
 .story-img{
   position:relative;aspect-ratio:3/4;min-height:280px;
   background-image:var(--img-team);background-size:cover;background-position:center;
@@ -264,14 +296,14 @@ section{padding:76px 0}
 .fact{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .fact dt{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .fact dd{margin:0;font-size:1.04rem}
+/* Telefon og adresse er begge links. Understregningen viser det. */
 .fact dd a{text-decoration:none;border-bottom:1.5px solid var(--gold)}
 .fact dd a:hover{background:rgba(176,141,87,.16)}
 .hours{margin:0;font-variant-numeric:tabular-nums}
 .hours div{display:flex;justify-content:space-between;gap:20px;padding:9px 0;border-bottom:1px solid var(--line);max-width:330px}
 .hours div:last-child{border-bottom:0}
 .hours span:first-child{color:var(--muted)}
-.hours .shut{color:var(--muted)}
-/* Dagens åbningstid fremhæves af sprog.js */
+/* .today sættes på af sprog.js, når dagens dato rammer rækken */
 .hours .today{font-weight:700}
 .hours .today span:first-child{color:var(--ink)}
 .hours .today span:last-child{
@@ -281,11 +313,19 @@ section{padding:76px 0}
 .visit-img{position:relative;aspect-ratio:1/1;background-image:var(--img-visit);background-size:cover;background-position:center;background-color:var(--cream-d)}
 .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
 .badge{
+  display:inline-flex;align-items:center;gap:8px;
   font-size:.82rem;font-weight:600;padding:8px 15px;
   border:1.5px solid var(--line);border-radius:999px;
   text-decoration:none;color:var(--muted);transition:.18s;
 }
 .badge:hover{border-color:var(--gold);color:var(--ink)}
+/* Facebook- og Instagram-mærkerne. Tegnet som streger, så de
+   følger tekstens farve og bliver skarpe i alle størrelser. */
+.badge svg{
+  width:17px;height:17px;flex:none;
+  fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;
+}
 .visit-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 
 /* ---- Anmeldelser ---- */
@@ -312,21 +352,9 @@ section{padding:76px 0}
 .review footer b{color:var(--ink);font-weight:600}
 
 /* ---- Footer ---- */
-footer{background:var(--cocoa-d);color:rgba(245,239,230,.6);padding:44px 0 100px;font-size:.88rem}
+footer{background:var(--cocoa-d);color:rgba(245,239,230,.6);padding:44px 0;font-size:.88rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
 footer a{color:rgba(245,239,230,.6)}
-
-/* ---- Sticky ring-bar på mobil ---- */
-.callbar{
-  position:fixed;left:0;right:0;bottom:0;z-index:70;
-  display:flex;border-top:1px solid rgba(245,239,230,.2);
-}
-.callbar a{
-  flex:1;text-align:center;text-decoration:none;
-  padding:16px 8px;font-size:1rem;font-weight:700;
-}
-.callbar .call{background:var(--gold);color:var(--cocoa-d)}
-.callbar .map{background:var(--cocoa-d);color:var(--cream)}
 
 /* ---- Desktop ---- */
 @media (min-width:760px){
@@ -341,19 +369,26 @@ footer a{color:rgba(245,239,230,.6)}
   .price::before{width:36px}
 }
 @media (min-width:980px){
-  .hero-grid{grid-template-columns:1.08fr .92fr;align-items:stretch}
-  .hero-copy{padding:112px 0 116px}
-  .hero-img{min-height:560px}
   .story-grid{grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
   .menu{grid-template-columns:repeat(3,1fr)}
-  .callbar{display:none}
-  footer{padding-bottom:44px}
 }
 
-/* Meget små telefoner: giv navigationen plads */
+/* ---- Mobil: navigationen flytter ned under navnet ---- */
+@media (max-width:700px){
+  .topbar .wrap{grid-template-columns:1fr auto;row-gap:12px}
+  .mainnav{
+    grid-column:1 / -1;justify-self:stretch;
+    justify-content:center;flex-wrap:wrap;gap:2px;
+    border-top:1px solid rgba(176,141,87,.24);padding-top:10px;
+  }
+  .mainnav a{font-size:.86rem;padding:6px 10px}
+  .hero{padding:40px 20px 84px}   /* højden regnes ud automatisk */
+}
 @media (max-width:430px){
-  .brand{font-size:1.3rem}
-  .nav a{padding:6px 10px;font-size:.82rem}
+  .brand{gap:10px}
+  .brand img{width:42px;height:42px}
+  .brand-navn{font-size:1.3rem}
+  .brand small{font-size:.55rem;letter-spacing:.18em}
   .langs button{padding:5px 8px;font-size:.72rem}
 }
 

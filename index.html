@@ -4,25 +4,54 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ChokoGlade — Italiensk café i Ribe | Antipasti, vafler, kaffe og chokolade</title>
-<meta name="description" content="Italiensk café på Nederdammen 32 i Ribe. Antipasti, panini, vafler med gelato, italiensk vin, illy-kaffe og chokolade fra Domori og Venchi. Åbent alle dage. Drevet af Eleonora og Giacomo fra Milano.">
+<meta name="description" content="Italiensk café på Nederdammen 32 i Ribe. Antipasti, panini, vafler med gelato, italiensk vin, illy-kaffe og chokolade fra Domori og Venchi. Åbent alle dage.">
 <link rel="stylesheet" href="style.css">
+
+<!-- Ikoner til browserfanen og til hjemmeskaermen paa telefonen -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#241109">
 
 <!--
   ============================================================
   CHOKOGLADE — forside
   ------------------------------------------------------------
-  Siden består af fire filer plus en billedmappe. Alt skal
-  ligge i samme mappe:
+  Alt skal ligge i samme mappe:
 
-     index.html      denne side
-     menukort.html   menukortet
-     style.css       alt design + hvilke billeder der bruges
-     sprog.js        ALLE tekster, på dansk, engelsk og tysk
-     billeder/       de ni billeder
+     index.html            denne side
+     menukort.html         menukortet
+     style.css             alt design + hvilke billeder der bruges
+     sprog.js              ALLE tekster, på dansk, engelsk og tysk
+     logo.svg              mærket, brugt i topbaren
+     favicon.svg           samme mærke, til browserfanen
+     billeder/             billederne
 
   Skal du rette en TEKST      -> sprog.js
   Skal du skifte et BILLEDE   -> style.css, øverst
   Skal du rette DESIGNET      -> style.css
+
+  Begge sider deler topbar, farver, skrifter og bundfelt, så
+  en rettelse i style.css slår igennem begge steder.
+
+  ------------------------------------------------------------
+  MÆRKET
+  ------------------------------------------------------------
+  Cirklen står som SVG-kode længere nede i denne fil. Den er
+  tegnet efter deres EGET skilt ved døren, ikke opfundet.
+
+  Den SAMME tegning ligger også i to filer:
+     logo.svg      det lille mærke i topbaren, begge sider
+     favicon.svg   ikonet i browserfanen, med mørk skive bagved
+
+  Retter du cirklen her, skal de to filer rettes med. Det er
+  bevidst tre kopier: cirklen her arver farven fra CSS, mens
+  de to filer hentes som billeder og selv skal have farven.
+
+  ADVARSEL til de to filer: en SVG der hentes som billede
+  parses som XML, og XML tillader ikke to bindestreger i træk
+  inde i en kommentar. Skriver du en skillelinje af
+  bindestreger derinde, holder hele filen op med at blive
+  tegnet. Det er præcis den fejl der fik mærket til at
+  forsvinde første gang.
 
   ------------------------------------------------------------
   KILDER
@@ -46,44 +75,128 @@
 
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="index.html">Choko<b>Glade</b></a>
-    <div class="topbar-right">
-      <nav class="nav">
-        <a href="menukort.html" data-t="nav.menu"></a>
-      </nav>
-      <nav class="langs" aria-label="Sprog / Language / Sprache">
-        <button type="button" data-lang="da" aria-pressed="true">DA</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        <button type="button" data-lang="de" aria-pressed="false">DE</button>
-      </nav>
-    </div>
+    <a class="brand" href="index.html">
+      <img src="logo.svg" alt="" width="52" height="52">
+      <span class="brand-navn">
+        Choko<b>Glade</b>
+        <small>Café · Cioccolateria</small>
+      </span>
+    </a>
+
+    <nav class="mainnav">
+      <a href="index.html" aria-current="page" data-t="nav.home"></a>
+      <a href="menukort.html" data-t="nav.menu"></a>
+      <a href="#historien" data-t="nav.story"></a>
+      <a href="#besoeg" data-t="nav.visit"></a>
+    </nav>
+
+    <nav class="langs" aria-label="Sprog / Language / Sprache">
+      <button type="button" data-lang="da" aria-pressed="true">DA</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </nav>
   </div>
 </header>
 
-<main id="top">
+<main>
 
-  <!-- ===================== HERO ===================== -->
+  <!-- ===================== HERO MED EMBLEM ===================== -->
   <section class="hero">
-    <div class="bar-texture"></div>
+
+    <svg class="emblem" viewBox="0 0 620 620" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-labelledby="emblemtitel">
+      <title id="emblemtitel">ChokoGlade — Eleonora &amp; Giacomo, Café Cioccolateria, Ribe</title>
+
+      <!-- Buerne teksten løber på.
+           Begge løber fra VENSTRE mod HØJRE. Det er vigtigt: gør
+           man bunden omvendt, vender SVG bogstaverne på hovedet.
+           Øverst r=240 (bogstaverne vokser udad til r=261).
+           Nederst r=261 (bogstaverne vokser indad til r=240).
+           Så ligger begge tekster i samme bånd, 25 px fra ringen. -->
+      <defs>
+        <path id="bueOver"  d="M 70,310 A 240,240 0 0 1 550,310"/>
+        <path id="bueUnder" d="M 49,310 A 261,261 0 0 0 571,310"/>
+
+        <!-- Skiven, som flagene beskæres af, så de aldrig
+             kan stikke uden for ringen -->
+        <clipPath id="skive">
+          <circle cx="310" cy="310" r="284"/>
+        </clipPath>
+
+        <!-- Det iturevne flag-stykke, som på deres eget skilt:
+             vandrette baner, flosset kant ind mod teksten, og
+             ud til kanten af skiven. Tegnet én gang og brugt
+             to gange — den venstre er et spejlbillede. -->
+        <g id="flagstykke">
+          <path fill="#008C45" d="M 525,264 L 515,275 L 527,286 L 521,296 L 610,292 L 610,258 Z"/>
+          <path fill="currentColor" d="M 521,296 L 531,305 L 519,315 L 527,325 L 610,321 L 610,292 Z"/>
+          <path fill="#CD212A" d="M 527,325 L 517,335 L 529,345 L 523,356 L 610,352 L 610,321 Z"/>
+        </g>
+      </defs>
+
+      <circle cx="310" cy="310" r="297" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      <circle cx="310" cy="310" r="286" fill="none" stroke="currentColor" stroke-width="1" opacity=".8"/>
+
+      <!-- Buetekst. textLength låser bredden, så den fylder det
+           samme uanset hvilken serif browseren finder. -->
+      <g fill="currentColor"
+         font-family="'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif">
+        <text font-size="27" text-anchor="middle">
+          <textPath href="#bueOver" startOffset="50%"
+                    textLength="452" lengthAdjust="spacingAndGlyphs">ELEONORA &amp; GIACOMO</textPath>
+        </text>
+        <text font-size="27" text-anchor="middle">
+          <textPath href="#bueUnder" startOffset="50%"
+                    textLength="462" lengthAdjust="spacingAndGlyphs">CAFÉ · CIOCCOLATERIA</textPath>
+        </text>
+      </g>
+
+      <!-- De to flag, ved 3 og 9, i det vandrette mellemrum mellem
+           de to buetekster. Præcis som på skiltet ved døren. -->
+      <g clip-path="url(#skive)">
+        <use href="#flagstykke"/>
+        <use href="#flagstykke" transform="translate(620,0) scale(-1,1)"/>
+      </g>
+
+      <!-- Navnet. textLength=360 -> spænder præcis x 130 til 490. -->
+      <text x="310" y="312" fill="currentColor" text-anchor="middle"
+            font-family="'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif"
+            font-style="italic" font-size="78"
+            textLength="360" lengthAdjust="spacingAndGlyphs">ChokoGladE</text>
+
+      <!-- Grundlagt. textLength=130 -> spænder x 245 til 375. -->
+      <text x="310" y="376" fill="currentColor" text-anchor="middle"
+            font-family="'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif"
+            font-size="23"
+            textLength="130" lengthAdjust="spacingAndGlyphs">EST. 2024</text>
+      <g stroke="currentColor" stroke-width="1.4">
+        <path d="M 176,368 L 222,368"/>
+        <path d="M 398,368 L 444,368"/>
+      </g>
+      <circle cx="233" cy="368" r="3" fill="currentColor"/>
+      <circle cx="387" cy="368" r="3" fill="currentColor"/>
+    </svg>
+
+    <a class="scrollcue" href="#intro">
+      <span></span>
+      <span data-t="cta.scroll"></span>
+    </a>
+  </section>
+
+  <!-- ===================== KORT INTRO ===================== -->
+  <section class="introduktion" id="intro">
     <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="kicker" data-t="hero.kicker"></p>
-          <h1 data-t="hero.title" data-html></h1>
-          <p class="hero-lede" data-t="hero.lede"></p>
-          <div class="hero-cta">
-            <a class="btn btn-gold" href="tel:+4591811859" data-t="cta.call"></a>
-            <a class="btn btn-ghost" href="menukort.html" data-t="cta.seeMenu"></a>
-          </div>
-        </div>
-        <div class="hero-img">
-          <div class="ph">Billede: facade</div>
-        </div>
+      <p class="kicker" data-t="hero.kicker"></p>
+      <h1 data-t="hero.title" data-html></h1>
+      <p style="margin-top:26px" data-t="hero.lede"></p>
+      <div class="hero-cta">
+        <a class="btn btn-dark" href="tel:+4591811859" data-t="cta.call"></a>
+        <a class="btn btn-dark" href="menukort.html" data-t="cta.seeMenu"></a>
       </div>
     </div>
   </section>
 
-  <!-- ============ UDDRAG AF MENUEN (hele kortet ligger i menukort.html) ============ -->
+  <!-- ===================== UDDRAG AF MENUEN ===================== -->
   <section id="menu">
     <div class="wrap">
       <div class="section-head">
@@ -111,9 +224,9 @@
       </div>
 
       <div class="gallery">
-        <div class="shot a"><div class="ph light">Billede: antipasti</div></div>
-        <div class="shot b"><div class="ph light">Billede: vafler</div></div>
-        <div class="shot c"><div class="ph light">Billede: interiør</div></div>
+        <div class="shot a"></div>
+        <div class="shot b"></div>
+        <div class="shot c"></div>
       </div>
     </div>
   </section>
@@ -128,28 +241,19 @@
           <h2 data-t="story.title"></h2>
           <p style="margin-top:24px" data-t="story.p1"></p>
           <p data-t="story.p2"></p>
-          <blockquote class="quote">
-            <span data-t="story.quote"></span>
-            <cite>Giacomo Montemagno</cite>
-          </blockquote>
         </div>
-        <div class="story-img">
-          <div class="ph">Billede: Eleonora &amp; Giacomo</div>
-        </div>
+        <div class="story-img"></div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== ANMELDELSER =====================
-       Hentet fra Google Business og Facebook 26. juli 2026.
-       Citaterne står på dansk i alle tre sprogversioner — det
-       er rigtige gæsters ord, og dem oversætter vi ikke. -->
+  <!-- ===================== ANMELDELSER ===================== -->
   <section class="reviews" id="anmeldelser">
     <div class="wrap">
       <div class="section-head">
         <h2 data-t="rev.title"></h2>
         <div class="rating">
-          <span class="score">4,7</span>
+          <span class="score" data-t="rev.score"></span>
           <span class="stars" aria-hidden="true">★★★★★</span>
           <span class="count">
             <span data-t="rev.count"></span> ·
@@ -192,22 +296,21 @@
           <dl class="facts">
             <div class="fact">
               <dt data-t="visit.addr"></dt>
-              <dd>Nederdammen 32A, st. tv.<br>6760 Ribe</dd>
+              <dd><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener"><span data-t="visit.addr1"></span><br><span data-t="visit.addr2"></span></a></dd>
             </div>
             <div class="fact">
               <dt data-t="visit.phone"></dt>
-              <dd><a href="tel:+4591811859">91 81 18 59</a></dd>
+              <dd><a href="tel:+4591811859" data-t="visit.phoneNr"></a></dd>
             </div>
             <div class="fact">
               <dt data-t="visit.hours"></dt>
               <dd>
-                <!-- Kilde: Google Business, 26. juli 2026.
-                     Dagens tid fremhæves automatisk af sprog.js. -->
+                <!-- Kilde: Google Business, 26. juli 2026. -->
                 <div class="hours">
-                  <div data-day="mon tue wed thu"><span data-t="visit.monthu"></span> <span>11.00 – 17.30</span></div>
-                  <div data-day="fri"><span data-t="visit.fri"></span> <span>12.00 – 19.30</span></div>
-                  <div data-day="sat"><span data-t="visit.sat"></span> <span>11.00 – 18.30</span></div>
-                  <div data-day="sun"><span data-t="visit.sun"></span> <span>11.00 – 17.00</span></div>
+                  <div data-day="mon tue wed thu"><span data-t="visit.monthu"></span> <span data-t="visit.h1"></span></div>
+                  <div data-day="fri"><span data-t="visit.fri"></span> <span data-t="visit.h2"></span></div>
+                  <div data-day="sat"><span data-t="visit.sat"></span> <span data-t="visit.h3"></span></div>
+                  <div data-day="sun"><span data-t="visit.sun"></span> <span data-t="visit.h4"></span></div>
                 </div>
               </dd>
             </div>
@@ -215,8 +318,22 @@
 
           <div class="badges">
             <span class="badge" data-t="visit.giftcard"></span>
-            <a class="badge" href="https://www.instagram.com/chokoglade_ribe/" target="_blank" rel="noopener">Instagram</a>
-            <a class="badge" href="https://www.facebook.com/p/ChokoGlade-Ribe-61567615954738/" target="_blank" rel="noopener">Facebook</a>
+            <a class="badge" href="https://www.instagram.com/chokoglade_ribe/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/>
+                <circle cx="12" cy="12" r="4.1"/>
+                <circle cx="17.1" cy="6.9" r="1.15" fill="currentColor" stroke="none"/>
+              </svg>
+              Instagram
+            </a>
+            <a class="badge" href="https://www.facebook.com/p/ChokoGlade-Ribe-61567615954738/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/>
+                <path d="M15.4 8.2h-1.2c-1.1 0-1.7 0.6-1.7 1.8V20"/>
+                <path d="M10.1 12.6h4.6"/>
+              </svg>
+              Facebook
+            </a>
           </div>
 
           <div class="visit-cta">
@@ -225,7 +342,7 @@
           </div>
         </div>
 
-        <div class="visit-img"><div class="ph light">Billede: facaden</div></div>
+        <div class="visit-img"></div>
       </div>
     </div>
   </section>
@@ -233,15 +350,10 @@
 
 <footer>
   <div class="wrap">
-    <span>ChokoGlade · Nederdammen 32A, 6760 Ribe · CVR 44468840</span>
-    <a href="tel:+4591811859">91 81 18 59</a>
+    <span data-t="footer.line"></span>
+    <a href="tel:+4591811859" data-t="visit.phoneNr"></a>
   </div>
 </footer>
-
-<div class="callbar">
-  <a class="call" href="tel:+4591811859" data-t="cta.callShort"></a>
-  <a class="map" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.routeShort"></a>
-</div>
 
 <script src="sprog.js"></script>
 </body>

@@ -8,39 +8,75 @@ Fire filer og en billedmappe. Det hele skal ligge sammen.
 | `menukort.html` | Menukortet |
 | `style.css` | Alt design **og** hvilke billeder der bruges |
 | `sprog.js` | **Alle tekster**, på dansk, engelsk og tysk |
-| `billeder/` | De ni billeder |
+| `logo.svg` | Mærket i topbaren |
+| `favicon.svg` | Samme mærke, til browserfanen |
+| `billeder/` | De elleve billeder |
 
 Tommelfingerregel: skal du rette en **tekst**, gør du det i `sprog.js`. Skal du skifte et **billede** eller rette **designet**, gør du det i `style.css`. HTML-filerne rører du kun, hvis du skal skrive priser ind eller tilføje en ret.
 
 Retter du en tekst i `sprog.js`, så husk alle tre sprog. Ellers står den gamle tekst tilbage på de to andre.
 
+Begge sider deler topbar, farver, skrifter og bundfelt gennem `style.css`. Retter du designet ét sted, slår det igennem begge steder. **Undtagelsen er topbarens HTML** — den står skrevet i begge filer, så tilføjer du et menupunkt, skal det ind begge steder.
+
+---
+
+# Mærket
+
+Cirklen er ikke et opfundet logo — det er deres eget runde skilt fra døren, renset op: "Eleonora & Giacomo" i bue foroven, navnet i midten, "Café · Cioccolateria" forneden, og de to iturevne italienske flag ved 3 og 9.
+
+Den findes **tre steder med præcis samme tegning**:
+
+| Hvor | Fil |
+|---|---|
+| Stort i heroen | SVG-kode inde i `index.html` |
+| Småt i topbaren, begge sider | `logo.svg` |
+| Browserfanen | `favicon.svg`, med mørk skive bagved så den ses på lyse faner |
+
+**Retter du i den ene, skal de to andre rettes med.** Det er bevidst tre kopier og ikke én fil: cirklen i heroen arver farven fra CSS, mens de to andre hentes som billeder og selv skal have farven skrevet ind.
+
+Cremefarven er `#F5EFE6`, samme som `--cream` i `style.css`. Ændrer du den, skal `logo.svg` og `favicon.svg` rettes i hånden.
+
+## Tre ting der kan gå galt
+
+**Buerne skal løbe fra venstre mod højre.** Vender du bundbuen om, står `CAFÉ · CIOCCOLATERIA` på hovedet. Sådan virker SVG.
+
+**Teksterne har låst bredde** med `textLength`. Det er derfor mærket ser ens ud uanset hvilken serif browseren finder. Skriver du en længere tekst ind, skal tallet med, ellers bliver bogstaverne mast sammen.
+
+**Ingen dobbelt bindestreg i kommentarerne i `logo.svg` og `favicon.svg`.** De to filer hentes som billeder og parses derfor som XML, og XML forbyder `--` inde i en kommentar. Skriver du en skillelinje af bindestreger derinde, holder hele filen op med at blive tegnet — mærket forsvinder uden fejlmeddelelse. Det er præcis den fejl der gjorde at cirklen forsvandt første gang.
+
+`<meta name="theme-color">` farver browserbjælken på Android i samme mørke kakaobrun som topbaren.
+
 ---
 
 # Billederne
 
-Alle ni billeder er skiftet ind og virker. De er konverteret til JPEG, komprimeret og ligger i `billeder/`. Samlet vægt: **1,6 MB** for hele sitet — det loader fint på mobildata.
+Alle billeder er konverteret til JPEG, komprimeret og ligger i `billeder/`. Samlet **1,9 MB** — det loader fint på mobildata.
 
 | Fil | Bruges til |
 |---|---|
-| `facade-hero.jpg` | Hero på forsiden — åben dør, illy-skilt, varmt lys indenfor |
-| `facade-skilt.jpg` | Kvadratet i "Besøg os" — hele ChokoGladE-skiltet og bænken |
+| `hero-emblem.jpg` | Forsidens hero — caféen indefra, mørklagt bag emblemet |
 | `antipasti.jpg` | Galleri — den fyldte tallerken. Sidens bedste madbillede |
 | `vafler.jpg` | Galleri — tre vafler med gelato |
 | `interioer.jpg` | Galleri — caféen indenfor med illy-skiltet i vinduet |
 | `giacomo-eleonora.jpg` | Historien — dem selv under skiltet |
+| `facade-sommer.jpg` | "Besøg os" — facaden, 1:1, sommergraderet |
 | `vaffel.jpg` | Menukortet, billedstribe |
 | `kaffe.jpg` | Menukortet, billedstribe |
 | `chokoladehylder.jpg` | Menukortet, billedstribe |
+| `facade-hero.jpg` | Bruges ikke — originalen som de to facadebilleder er lavet ud fra |
+| `facade-skilt.jpg` | Bruges ikke — facaden med hele ChokoGladE-skiltet |
 
 ## Skal du skifte et billede
 
 Læg det nye i `billeder/` og ret filnavnet øverst i `style.css`:
 
 ```css
---img-facade: url("billeder/dit-nye-navn.jpg");
+--img-hero: url("billeder/dit-nye-navn.jpg");
 ```
 
 Galleriet og billedstriben er kvadratiske, fordi billederne er en blanding af stående og liggende — kvadratet beskærer mindst af begge dele. Beskæringen kan finjusteres med `background-position` samme sted i `style.css`.
+
+Hero-billedet er mørklagt og kakao-tonet med en vignette, så det lyse emblem kan læses henover. Skifter du det ud med et almindeligt lyst billede, forsvinder emblemet. Sløret over billedet sidder i `style.css` som `.hero::after` og kan gøres kraftigere.
 
 ---
 

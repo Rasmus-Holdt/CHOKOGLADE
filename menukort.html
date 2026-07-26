@@ -7,6 +7,10 @@
 <meta name="description" content="Menukort for ChokoGlade i Ribe: antipasti, panini, vafler med gelato, illy-kaffe, italiensk vin og chokolade fra Domori og Venchi. Nederdammen 32A, 6760 Ribe.">
 <link rel="stylesheet" href="style.css">
 
+<!-- Ikoner til browserfanen og til hjemmeskaermen paa telefonen -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#241109">
+
 <!--
   ============================================================
   CHOKOGLADE — menukort
@@ -69,19 +73,30 @@
 
 <body data-page="menukort">
 
+<!-- Samme topbar som forsiden. Rettes den ét sted, skal den
+     rettes begge steder — kun designet er fælles via style.css. -->
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="index.html">Choko<b>Glade</b></a>
-    <div class="topbar-right">
-      <nav class="nav">
-        <a href="index.html" data-t="nav.home"></a>
-      </nav>
-      <nav class="langs" aria-label="Sprog / Language / Sprache">
-        <button type="button" data-lang="da" aria-pressed="true">DA</button>
-        <button type="button" data-lang="en" aria-pressed="false">EN</button>
-        <button type="button" data-lang="de" aria-pressed="false">DE</button>
-      </nav>
-    </div>
+    <a class="brand" href="index.html">
+      <img src="logo.svg" alt="" width="52" height="52">
+      <span class="brand-navn">
+        Choko<b>Glade</b>
+        <small>Café · Cioccolateria</small>
+      </span>
+    </a>
+
+    <nav class="mainnav">
+      <a href="index.html" data-t="nav.home"></a>
+      <a href="menukort.html" aria-current="page" data-t="nav.menu"></a>
+      <a href="index.html#historien" data-t="nav.story"></a>
+      <a href="index.html#besoeg" data-t="nav.visit"></a>
+    </nav>
+
+    <nav class="langs" aria-label="Sprog / Language / Sprache">
+      <button type="button" data-lang="da" aria-pressed="true">DA</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </nav>
   </div>
 </header>
 
@@ -221,15 +236,10 @@
 
 <footer>
   <div class="wrap">
-    <span>ChokoGlade · Nederdammen 32A, 6760 Ribe · CVR 44468840</span>
-    <a href="tel:+4591811859">91 81 18 59</a>
+    <span data-t="footer.line"></span>
+    <a href="tel:+4591811859" data-t="visit.phoneNr"></a>
   </div>
 </footer>
-
-<div class="callbar">
-  <a class="call" href="tel:+4591811859" data-t="cta.callShort"></a>
-  <a class="map" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.routeShort"></a>
-</div>
 
 <script src="sprog.js"></script>
 </body>

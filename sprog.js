@@ -24,11 +24,11 @@ const T = {
 da: {
   "nav.menu": "Menukort",
   "nav.home": "Forsiden",
+  "nav.story": "Historien",
+  "nav.visit": "Besøg os",
 
   "cta.call": "Ring 91 81 18 59",
   "cta.route": "Find vej",
-  "cta.callShort": "Ring",
-  "cta.routeShort": "Find vej",
   "cta.seeMenu": "Se hele menukortet",
 
   /* ---- Forside: hero ---- */
@@ -51,7 +51,6 @@ da: {
   "story.title": "Fra Milano til Ribe",
   "story.p1": "Eleonora Dovera og Giacomo Montemagno boede i Milano med AC Milans stadion i nabolaget. Hun var regnskabschef, han var læge. De havde besøgt Ribe som turister, faldt for byen og vikingehistorien — og besluttede sig.",
   "story.p2": "De solgte huset, sagde jobbene op og åbnede på Nederdammen den 23. april 2024. I dag bor de i Øster Vedsted, og det er dem selv, du møder bag disken.",
-  "story.quote": "Gågaden er hyggelig, ikke tomme butikker som i gågaden i Esbjerg.",
 
   /* ---- Forside: anmeldelser ---- */
   "rev.title": "Hvad gæsterne siger",
@@ -68,7 +67,18 @@ da: {
   "rev.3n": "Kirsten Jensen",
   "rev.3w": "Facebook",
 
-  /* ---- Forside: besøg os ---- */
+  /* ---- Forside: besøg os, samt et par løsdele ---- */
+  "cta.scroll": "Se mere",
+
+  "visit.addr1": "Nederdammen 32A, st. tv.",
+  "visit.addr2": "6760 Ribe",
+  "visit.phoneNr": "91 81 18 59",
+  "visit.h1": "11.00 – 17.30",
+  "visit.h2": "12.00 – 19.30",
+  "visit.h3": "11.00 – 18.30",
+  "visit.h4": "11.00 – 17.00",
+  "rev.score": "4,7",
+  "footer.line": "ChokoGlade · Nederdammen 32A, 6760 Ribe · CVR 44468840",
   "visit.title": "Besøg os",
   "visit.lede": "Vi ligger midt på gågaden i Ribe, to minutters gang fra Domkirken. Åbent alle ugens dage.",
   "visit.addr": "Adresse",
@@ -127,11 +137,11 @@ da: {
 en: {
   "nav.menu": "Menu",
   "nav.home": "Home",
+  "nav.story": "Our story",
+  "nav.visit": "Visit us",
 
   "cta.call": "Call +45 91 81 18 59",
   "cta.route": "Get directions",
-  "cta.callShort": "Call",
-  "cta.routeShort": "Directions",
   "cta.seeMenu": "See the full menu",
 
   "hero.kicker": "Café · Cioccolateria · Nederdammen 32, Ribe",
@@ -151,8 +161,8 @@ en: {
   "story.title": "From Milan to Ribe",
   "story.p1": "Eleonora Dovera and Giacomo Montemagno lived in Milan, with the AC Milan stadium in the neighbourhood. She was head of accounting, he was a doctor. They had visited Ribe as tourists, fell for the town and its Viking history — and made up their minds.",
   "story.p2": "They sold the house, resigned from their jobs, and opened on Nederdammen on 23 April 2024. Today they live in Øster Vedsted, and they are the ones you meet behind the counter.",
-  "story.quote": "Gågaden er hyggelig, ikke tomme butikker som i gågaden i Esbjerg.",
 
+  /* ---- Forside: anmeldelser ---- */
   "rev.title": "What our guests say",
   "rev.count": "53 reviews on Google",
   "rev.link": "Read them all",
@@ -167,6 +177,17 @@ en: {
   "rev.3n": "Kirsten Jensen",
   "rev.3w": "Facebook",
 
+  "cta.scroll": "See more",
+
+  "visit.addr1": "Nederdammen 32A, ground floor",
+  "visit.addr2": "6760 Ribe, Denmark",
+  "visit.phoneNr": "+45 91 81 18 59",
+  "visit.h1": "11:00 – 17:30",
+  "visit.h2": "12:00 – 19:30",
+  "visit.h3": "11:00 – 18:30",
+  "visit.h4": "11:00 – 17:00",
+  "rev.score": "4.7",
+  "footer.line": "ChokoGlade · Nederdammen 32A, 6760 Ribe, Denmark · Company reg. 44468840",
   "visit.title": "Visit us",
   "visit.lede": "We are on the pedestrian street in Ribe, a two-minute walk from the Cathedral. Open every day.",
   "visit.addr": "Address",
@@ -224,11 +245,11 @@ en: {
 de: {
   "nav.menu": "Speisekarte",
   "nav.home": "Startseite",
+  "nav.story": "Unsere Geschichte",
+  "nav.visit": "Besuchen Sie uns",
 
   "cta.call": "Anrufen +45 91 81 18 59",
   "cta.route": "Route planen",
-  "cta.callShort": "Anrufen",
-  "cta.routeShort": "Route",
   "cta.seeMenu": "Zur ganzen Speisekarte",
 
   "hero.kicker": "Café · Cioccolateria · Nederdammen 32, Ribe",
@@ -248,7 +269,6 @@ de: {
   "story.title": "Von Mailand nach Ribe",
   "story.p1": "Eleonora Dovera und Giacomo Montemagno lebten in Mailand, mit dem Stadion des AC Mailand in der Nachbarschaft. Sie war Leiterin der Buchhaltung, er war Arzt. Sie hatten Ribe als Touristen besucht, verliebten sich in die Stadt und ihre Wikingergeschichte — und entschieden sich.",
   "story.p2": "Sie verkauften das Haus, kündigten ihre Jobs und eröffneten am 23. April 2024 in der Nederdammen. Heute wohnen sie in Øster Vedsted, und sie selbst stehen hinter der Theke.",
-  "story.quote": "Gågaden er hyggelig, ikke tomme butikker som i gågaden i Esbjerg.",
 
   "rev.title": "Was unsere Gäste sagen",
   "rev.count": "53 Bewertungen bei Google",
@@ -264,6 +284,17 @@ de: {
   "rev.3n": "Kirsten Jensen",
   "rev.3w": "Facebook",
 
+  "cta.scroll": "Mehr sehen",
+
+  "visit.addr1": "Nederdammen 32A, Erdgeschoss",
+  "visit.addr2": "6760 Ribe, Dänemark",
+  "visit.phoneNr": "+45 91 81 18 59",
+  "visit.h1": "11:00 – 17:30",
+  "visit.h2": "12:00 – 19:30",
+  "visit.h3": "11:00 – 18:30",
+  "visit.h4": "11:00 – 17:00",
+  "rev.score": "4,7",
+  "footer.line": "ChokoGlade · Nederdammen 32A, 6760 Ribe, Dänemark · Handelsregister 44468840",
   "visit.title": "Besuchen Sie uns",
   "visit.lede": "Wir liegen in der Fußgängerzone von Ribe, zwei Gehminuten vom Dom entfernt. Täglich geöffnet.",
   "visit.addr": "Adresse",
@@ -385,12 +416,18 @@ try {
 
 setLang(startLang);
 
-/* Skjuler den stiplede placeholder, hvis der ikke er sat et billede
-   ind i style.css. Klarer sig selv. */
-document.querySelectorAll(".ph").forEach(ph => {
-  const bg = getComputedStyle(ph.parentElement).backgroundImage;
-  if (bg && bg !== "none") ph.hidden = true;
-});
+/* Måler topbarens højde og giver den videre til CSS, så heroen
+   kan fylde præcis resten af skærmen. Måles igen når vinduet
+   ændrer størrelse, eller navigationen ombryder til to linjer. */
+(function(){
+  const bar = document.querySelector(".topbar");
+  if (!bar) return;
+  const maal = () =>
+    document.documentElement.style.setProperty("--topbar-h", bar.offsetHeight + "px");
+  maal();
+  window.addEventListener("resize", maal);
+  window.addEventListener("orientationchange", maal);
+})();
 
 /* Fremhæver dagens åbningstid, så man kan se den med det samme */
 (function(){

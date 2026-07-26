@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 620" role="img"
+     aria-label="ChokoGlade — Eleonora &amp; Giacomo, Café Cioccolateria, Ribe">
+<!--
+  CHOKOGLADE, logo.svg
+
+  Nøjagtig samme tegning som cirklen i heroen på forsiden.
+  Denne fil bruges til det lille mærke i topbaren, på begge sider.
+
+  Farverne står skrevet ind her. En SVG der hentes med et
+  img-element arver ikke farver fra CSS. Cremefarven er #F5EFE6,
+  samme som variablen cream i style.css. Retter du den ene,
+  skal den anden med.
+
+  VIGTIGT hvis du redigerer filen: en SVG der hentes som billede
+  parses som XML, og XML tillader IKKE to bindestreger i træk
+  inde i en kommentar. Skriver du en skillelinje af bindestreger
+  her, holder hele filen op med at blive tegnet.
+-->
+  <defs>
+    <path id="bueOver"  d="M 70,310 A 240,240 0 0 1 550,310"/>
+    <path id="bueUnder" d="M 49,310 A 261,261 0 0 0 571,310"/>
+
+    <clipPath id="skive">
+      <circle cx="310" cy="310" r="284"/>
+    </clipPath>
+
+    <g id="flagstykke">
+      <path fill="#008C45" d="M 525,264 L 515,275 L 527,286 L 521,296 L 610,292 L 610,258 Z"/>
+      <path fill="#F5EFE6" d="M 521,296 L 531,305 L 519,315 L 527,325 L 610,321 L 610,292 Z"/>
+      <path fill="#CD212A" d="M 527,325 L 517,335 L 529,345 L 523,356 L 610,352 L 610,321 Z"/>
+    </g>
+  </defs>
+
+  <circle cx="310" cy="310" r="297" fill="none" stroke="#F5EFE6" stroke-width="2.5"/>
+  <circle cx="310" cy="310" r="286" fill="none" stroke="#F5EFE6" stroke-width="1" opacity=".8"/>
+
+  <g fill="#F5EFE6" font-family="'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif">
+    <text font-size="27" text-anchor="middle">
+      <textPath href="#bueOver" startOffset="50%"
+                textLength="452" lengthAdjust="spacingAndGlyphs">ELEONORA &amp; GIACOMO</textPath>
+    </text>
+    <text font-size="27" text-anchor="middle">
+      <textPath href="#bueUnder" startOffset="50%"
+                textLength="462" lengthAdjust="spacingAndGlyphs">CAFÉ · CIOCCOLATERIA</textPath>
+    </text>
+  </g>
+
+  <g clip-path="url(#skive)">
+    <use href="#flagstykke"/>
+    <use href="#flagstykke" transform="translate(620,0) scale(-1,1)"/>
+  </g>
+
+  <text x="310" y="312" fill="#F5EFE6" text-anchor="middle"
+        font-family="'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif"
+        font-style="italic" font-size="78"
+        textLength="360" lengthAdjust="spacingAndGlyphs">ChokoGladE</text>
+
+  <text x="310" y="376" fill="#F5EFE6" text-anchor="middle"
+        font-family="'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif"
+        font-size="23"
+        textLength="130" lengthAdjust="spacingAndGlyphs">EST. 2024</text>
+  <g stroke="#F5EFE6" stroke-width="1.4">
+    <path d="M 176,368 L 222,368"/>
+    <path d="M 398,368 L 444,368"/>
+  </g>
+  <circle cx="233" cy="368" r="3" fill="#F5EFE6"/>
+  <circle cx="387" cy="368" r="3" fill="#F5EFE6"/>
+</svg>
