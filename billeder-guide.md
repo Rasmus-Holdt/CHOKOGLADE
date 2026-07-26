@@ -34,15 +34,14 @@ Brudpunkterne står nederst i `style.css`. De er sat efter målte bredder, ikke 
 | fra 900 px | Anmeldelserne i tre spalter |
 | fra 980 px | "Besøg os" og historien i to spalter, menu i tre |
 
-## Tre ting der kun gælder telefon
+## To ting der kun gælder telefon
 
 Blokken `@media (max-width:700px)` nederst i `style.css`. På iPad og computer er alt uændret.
 
 1. **Sprogvælgeren står ved siden af navnet.** Uden de tre linjer placerer grid'et den selv, og så havner den på en tredje række helt under navigationen.
-2. **Knappen "Se hele menukortet" mellem overskriften og billederne er skjult.** Der er stadig to andre veje til menukortet: øverst i introen og i topbaren.
-3. **Facadebilledet nederst under "Besøg os" er skjult.** Facaden er allerede vist i toppen af siden.
+2. **Facadebilledet nederst under "Besøg os" er skjult.** Facaden er allerede vist i toppen af siden. Det er skjult med CSS, ikke slettet — det står stadig i `index.html` og vises på større skærme.
 
-Punkt 2 og 3 er skjult med CSS, ikke slettet. De står stadig i `index.html` og vises på større skærme.
+Knappen "Se hele menukortet" mellem overskriften og billederne er **slettet på alle skærmstørrelser**. Der er stadig to veje til menukortet: knappen øverst i introen og punktet i topbaren.
 
 **Hvorfor 1000 px og ikke 800.** Topbaren i én række kræver 825 px, fordi navn, fire menupunkter og sprogvælgeren skal stå ved siden af hinanden — målt på tysk, som er det bredeste sprog. Alle iPads i portræt er mellem 744 og 1024 px, så de får den stablede udgave. Sætter du grænsen lavere, brækker topbaren på iPad.
 
