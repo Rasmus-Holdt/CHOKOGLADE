@@ -54,7 +54,12 @@ body{
   line-height:1.65;
   color:var(--ink);
   background:var(--cream);
+  /* Sikkerhedsnet: en lang adresse eller et langt tysk ord må
+     aldrig kunne skubbe siden bredere end skærmen. */
+  overflow-wrap:break-word;
 }
+/* Vandret scroll er altid en fejl på telefon */
+html,body{overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit}
 
@@ -83,6 +88,7 @@ section{padding:76px 0}
 .topbar{
   position:sticky;top:0;z-index:60;
   background:rgba(36,17,9,.94);
+  -webkit-backdrop-filter:saturate(150%) blur(8px);  /* Safari, iPhone og iPad */
   backdrop-filter:saturate(150%) blur(8px);
   border-bottom:1px solid rgba(176,141,87,.28);
 }
@@ -293,7 +299,8 @@ section{padding:76px 0}
 /* ---- Besøg os ---- */
 .visit-grid{display:grid;grid-template-columns:1fr;gap:38px}
 .facts{border-top:2px solid var(--ink)}
-.fact{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+/* 132 px, ikke 118: tysk "Öffnungszeiten" er bredere end 118. */
+.fact{display:grid;grid-template-columns:132px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .fact dt{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .fact dd{margin:0;font-size:1.04rem}
 /* Telefon og adresse er begge links. Understregningen viser det. */
@@ -353,43 +360,112 @@ section{padding:76px 0}
 
 /* ---- Footer ---- */
 footer{background:var(--cocoa-d);color:rgba(245,239,230,.6);padding:44px 0;font-size:.88rem}
-footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+/* Kun én linje tilbage i bunden, så den centreres */
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;text-align:center}
 footer a{color:rgba(245,239,230,.6)}
 
-/* ---- Desktop ---- */
-@media (min-width:760px){
-  section{padding:104px 0}
-  .pagehead{padding:86px 0 78px}
+/* ============================================================
+   SKÆRMSTØRRELSER
+
+   Topbaren i én række kræver ca. 825 px, fordi navn, fire
+   menupunkter og sprogvælgeren skal stå ved siden af hinanden.
+   Derfor stables den hele vejen op til 1000 px — så får ALLE
+   iPads i portræt (744 til 1024 px) den stablede udgave.
+   Det er målt på den længste sprogversion, ikke gættet.
+
+   Indholdet går i spalter allerede fra 700 px, så en iPad mini
+   ikke står med kæmpestore enkeltbilleder.
+   ============================================================ */
+
+/* ---- Tablet og opefter: indholdet i spalter ---- */
+@media (min-width:700px){
+  section{padding:96px 0}
+  .pagehead{padding:80px 0 72px}
   .menu{grid-template-columns:repeat(2,1fr)}
   .gallery{grid-template-columns:repeat(3,1fr)}
   .strip{grid-template-columns:repeat(3,1fr)}
-  .review-grid{grid-template-columns:repeat(3,1fr)}
-  .visit-grid{grid-template-columns:1.25fr 1fr;gap:56px;align-items:start}
   .price{padding-left:44px}
   .price::before{width:36px}
 }
+@media (min-width:900px){
+  section{padding:104px 0}
+  .pagehead{padding:86px 0 78px}
+  /* Anmeldelserne først i tre spalter når der er plads til at
+     læse dem. Under det bliver linjerne for korte. */
+  .review-grid{grid-template-columns:repeat(3,1fr)}
+}
 @media (min-width:980px){
+  /* "Besøg os" i to spalter først her. Går den tidligere, bliver
+     højre spalte så smal at "Montag – Donnerstag  11:00 – 17:30"
+     ikke kan stå på én linje. Det rammer iPad i portræt. */
+  .visit-grid{grid-template-columns:1.25fr 1fr;gap:56px;align-items:start}
   .story-grid{grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
   .menu{grid-template-columns:repeat(3,1fr)}
 }
 
-/* ---- Mobil: navigationen flytter ned under navnet ---- */
-@media (max-width:700px){
+/* ---- Op til 1000 px: navigationen flytter ned under navnet ---- */
+@media (max-width:999px){
   .topbar .wrap{grid-template-columns:1fr auto;row-gap:12px}
+  .topbar .wrap > *{min-width:0}
   .mainnav{
     grid-column:1 / -1;justify-self:stretch;
     justify-content:center;flex-wrap:wrap;gap:2px;
-    border-top:1px solid rgba(176,141,87,.24);padding-top:10px;
+    border-top:1px solid rgba(176,141,87,.24);padding-top:8px;
   }
-  .mainnav a{font-size:.86rem;padding:6px 10px}
+  /* Større trykflader på touch */
+  .mainnav a{font-size:.9rem;padding:10px 13px}
+  .langs button{padding:9px 13px}
   .hero{padding:40px 20px 84px}   /* højden regnes ud automatisk */
 }
+
+/* ============================================================
+   KUN TELEFON (op til 700 px)
+   Herunder er skærmen for lille til alt. Disse tre ting gælder
+   udelukkende telefon — på iPad og computer er de uændrede.
+   ============================================================ */
+@media (max-width:700px){
+  /* 1. Sprogvælgeren op ved siden af navnet.
+        Uden de her tre linjer placerer grid'et den selv, og så
+        havner den på en tredje række under navigationen. */
+  .brand  {grid-row:1;grid-column:1}
+  .langs  {grid-row:1;grid-column:2}
+  .mainnav{grid-row:2}
+
+  /* 2. Knappen "Se hele menukortet" mellem overskriften og
+        billederne. Den står også i topbaren og i introen. */
+  .menu-more{display:none}
+
+  /* 3. Facadebilledet nederst under "Besøg os".
+        Facaden er allerede vist i toppen af siden. */
+  .visit-img{display:none}
+  .visit-grid{gap:0}
+}
+
+/* ---- Telefon: adresse og åbningstider får hele bredden ---- */
+@media (max-width:560px){
+  /* Etiketten stod i en fast 118 px spalte. "Öffnungszeiten"
+     er bredere end det, og så blev åbningstiderne klemt. */
+  .fact{grid-template-columns:1fr;gap:6px;padding:18px 0}
+  .fact dt{font-size:.72rem}
+  .hours div{max-width:none}
+  .rating .score{font-size:2.6rem}
+}
+
+/* ---- Små telefoner ---- */
 @media (max-width:430px){
+  section{padding:60px 0}
   .brand{gap:10px}
   .brand img{width:42px;height:42px}
-  .brand-navn{font-size:1.3rem}
-  .brand small{font-size:.55rem;letter-spacing:.18em}
-  .langs button{padding:5px 8px;font-size:.72rem}
+  .brand-navn{font-size:1.25rem}
+  .brand small{font-size:.52rem;letter-spacing:.14em;margin-top:4px}
+  .langs button{padding:8px 10px;font-size:.72rem}
+  .mainnav a{font-size:.85rem;padding:9px 10px}
+  .wrap{padding:0 18px}
+  .item{padding:26px 22px}
+  .review{padding:24px 22px}
+  .btn{padding:14px 22px;font-size:.95rem}
+  .hero-cta{width:100%}
+  .hero-cta .btn{flex:1 1 100%;justify-content:center}
 }
 
 /* ---- Tilgængelighed ---- */

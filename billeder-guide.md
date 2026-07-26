@@ -20,6 +20,40 @@ Begge sider deler topbar, farver, skrifter og bundfelt gennem `style.css`. Rette
 
 ---
 
+# Skærmstørrelser
+
+Brudpunkterne står nederst i `style.css`. De er sat efter målte bredder, ikke efter runde tal.
+
+| Bredde | Hvad sker der |
+|---|---|
+| under 430 px | Mindre mærke, mindre luft, knapper i fuld bredde |
+| under 560 px | Adresse og åbningstider får hele bredden, etiketten står ovenover |
+| **under 700 px** | **Kun telefon** — se nedenfor |
+| under 1000 px | Navigationen ligger på sin egen række under navnet |
+| fra 700 px | Menu i to spalter, galleri og billedstribe i tre |
+| fra 900 px | Anmeldelserne i tre spalter |
+| fra 980 px | "Besøg os" og historien i to spalter, menu i tre |
+
+## Tre ting der kun gælder telefon
+
+Blokken `@media (max-width:700px)` nederst i `style.css`. På iPad og computer er alt uændret.
+
+1. **Sprogvælgeren står ved siden af navnet.** Uden de tre linjer placerer grid'et den selv, og så havner den på en tredje række helt under navigationen.
+2. **Knappen "Se hele menukortet" mellem overskriften og billederne er skjult.** Der er stadig to andre veje til menukortet: øverst i introen og i topbaren.
+3. **Facadebilledet nederst under "Besøg os" er skjult.** Facaden er allerede vist i toppen af siden.
+
+Punkt 2 og 3 er skjult med CSS, ikke slettet. De står stadig i `index.html` og vises på større skærme.
+
+**Hvorfor 1000 px og ikke 800.** Topbaren i én række kræver 825 px, fordi navn, fire menupunkter og sprogvælgeren skal stå ved siden af hinanden — målt på tysk, som er det bredeste sprog. Alle iPads i portræt er mellem 744 og 1024 px, så de får den stablede udgave. Sætter du grænsen lavere, brækker topbaren på iPad.
+
+**Hvorfor "Besøg os" først deler sig ved 980 px.** Højre spalte bliver ellers så smal at `Montag – Donnerstag  11:00 – 17:30` ikke kan stå på én linje. Det ramte iPad 10.9" og Pro 11" i portræt.
+
+**Hvorfor etiketspalten er 132 px og ikke 118.** Tysk `Öffnungszeiten` er bredere end 118 px.
+
+Ændrer du et menupunkt til noget længere, så tjek at de fire punkter stadig kan være på én række ved 1000 px. Ellers skal grænsen op.
+
+---
+
 # Mærket
 
 Cirklen er ikke et opfundet logo — det er deres eget runde skilt fra døren, renset op: "Eleonora & Giacomo" i bue foroven, navnet i midten, "Café · Cioccolateria" forneden, og de to iturevne italienske flag ved 3 og 9.

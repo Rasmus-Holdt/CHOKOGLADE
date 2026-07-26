@@ -244,9 +244,9 @@ en: {
 /* =========================== DEUTSCH =========================== */
 de: {
   "nav.menu": "Speisekarte",
-  "nav.home": "Startseite",
-  "nav.story": "Unsere Geschichte",
-  "nav.visit": "Besuchen Sie uns",
+  "nav.home": "Start",
+  "nav.story": "Geschichte",
+  "nav.visit": "Besuchen",
 
   "cta.call": "Anrufen +45 91 81 18 59",
   "cta.route": "Route planen",
