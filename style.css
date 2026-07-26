@@ -1,0 +1,362 @@
+/* ============================================================
+   CHOKOGLADE — style.css
+   Fælles design for begge sider. Retter du noget her, slår det
+   igennem på både forsiden og menukortet.
+   ============================================================ */
+
+:root{
+  /* ---- BILLEDER ----
+     Alle billeder ligger i mappen billeder/ ved siden af denne fil.
+     Vil du skifte et ud, så læg det nye billede i mappen og ret
+     filnavnet her. Ellers skal du ikke røre noget.
+     Se billeder-guide.md for formater. */
+
+  /* Forsiden */
+  --img-facade:  url("billeder/facade-hero.jpg");      /* Hero: åben dør, illy-skilt */
+  --img-plate1:  url("billeder/antipasti.jpg");        /* Antipasti-tallerken */
+  --img-plate2:  url("billeder/vafler.jpg");           /* Tre vafler med gelato */
+  --img-inside:  url("billeder/interioer.jpg");        /* Caféen indenfor */
+  --img-team:    url("billeder/giacomo-eleonora.jpg"); /* Giacomo og Eleonora */
+  --img-visit:   url("billeder/facade-skilt.jpg");     /* Facaden med ChokoGladE-skiltet */
+
+  /* Menukortet */
+  --img-vaffel:  url("billeder/vaffel.jpg");           /* Vaffel med gelato, tæt på */
+  --img-kaffe:   url("billeder/kaffe.jpg");            /* Cappuccino og vaffel på bordet */
+  --img-choko:   url("billeder/chokoladehylder.jpg");  /* Chokoladehylderne */
+
+  /* ---- Farver ---- */
+  --cocoa:   #3B2314;
+  --cocoa-d: #241109;
+  --cream:   #F5EFE6;
+  --cream-d: #EAE0D2;
+  --gold:    #B08D57;
+  --gold-l:  #C9A870;
+  --ink:     #2A1810;
+  --muted:   #6E5646;
+  --line:    rgba(59,35,20,.14);
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --wrap: 1080px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--cream);
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;margin:0}
+h1{font-size:clamp(2.5rem,7vw,4.4rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.75rem,4.2vw,2.6rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 1rem}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+section{padding:76px 0}
+
+/* ---- Chokoladeplade-tekstur ----
+   Rudemønsteret fra en brækket chokoladeplade. Meget lav kontrast
+   — det skal føles som en overflade, ikke ses som et mønster. */
+.bar-texture{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,.07) 1px, transparent 1px);
+  background-size:74px 74px;
+  opacity:.5;
+}
+
+/* ---- Topbar ---- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(36,17,9,.94);
+  backdrop-filter:saturate(150%) blur(8px);
+  border-bottom:1px solid rgba(176,141,87,.28);
+}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:11px;padding-bottom:11px}
+.brand{font-family:var(--serif);color:var(--cream);font-size:1.65rem;letter-spacing:.01em;text-decoration:none;white-space:nowrap;line-height:1}
+.brand b{color:var(--gold-l);font-weight:400}
+.topbar-right{display:flex;align-items:center;gap:8px}
+
+/* Sidenavigation i toppen */
+.nav a{
+  display:inline-block;text-decoration:none;
+  font-size:.88rem;font-weight:600;
+  color:rgba(245,239,230,.8);
+  padding:7px 13px;border-radius:999px;
+  border:1.5px solid rgba(176,141,87,.45);
+  transition:.18s;white-space:nowrap;
+}
+.nav a:hover{color:var(--cocoa-d);background:var(--gold);border-color:var(--gold)}
+.nav a[aria-current="page"]{color:var(--cocoa-d);background:var(--gold);border-color:var(--gold)}
+
+.langs{display:flex;gap:2px;background:rgba(245,239,230,.09);border-radius:999px;padding:3px}
+.langs button{
+  font:inherit;font-size:.76rem;font-weight:600;letter-spacing:.06em;
+  border:0;background:transparent;color:rgba(245,239,230,.62);
+  padding:5px 10px;border-radius:999px;cursor:pointer;transition:.18s;
+}
+.langs button:hover{color:var(--cream)}
+.langs button[aria-pressed="true"]{background:var(--gold);color:var(--cocoa-d)}
+
+/* ---- Knapper ---- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:1rem;font-weight:600;text-decoration:none;
+  padding:15px 28px;border-radius:3px;border:1.5px solid transparent;
+  transition:.18s;white-space:nowrap;
+}
+.btn-gold{background:var(--gold);color:var(--cocoa-d)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{border-color:rgba(245,239,230,.45);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--cream);background:rgba(245,239,230,.09)}
+.btn-dark{background:var(--cocoa);color:var(--cream)}
+.btn-dark:hover{background:var(--cocoa-d)}
+
+/* ---- Hero (forsiden) ---- */
+.hero{position:relative;background:var(--cocoa-d);color:var(--cream);overflow:hidden;padding:0}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:0}
+.hero-copy{padding:64px 0 68px;position:relative;z-index:2}
+.hero h1{color:var(--cream)}
+.hero h1 em{font-style:normal;color:var(--gold-l)}
+.kicker{
+  font-size:.78rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--gold-l);margin:0 0 20px;
+}
+.hero-lede{font-size:1.16rem;color:rgba(245,239,230,.82);max-width:46ch;margin:22px 0 34px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-img{
+  position:relative;min-height:300px;
+  background-color:#1B0D06;
+  background-image:var(--img-facade);
+  background-size:cover;background-position:center;
+}
+
+/* ---- Sidehoved (menukortet) ---- */
+.pagehead{position:relative;background:var(--cocoa-d);color:var(--cream);padding:66px 0 60px;overflow:hidden}
+.pagehead .wrap{position:relative;z-index:2}
+.pagehead h1{color:var(--cream);font-size:clamp(2.2rem,6vw,3.6rem)}
+.pagehead p{color:rgba(245,239,230,.78);max-width:52ch;margin:18px 0 0;font-size:1.08rem}
+
+/* ---- Billed-placeholder ---- */
+.ph{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:20px;
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(176,141,87,.85);
+  background:
+    repeating-linear-gradient(-45deg, rgba(176,141,87,.07) 0 12px, transparent 12px 24px),
+    #241109;
+  border:1px dashed rgba(176,141,87,.4);
+}
+.ph.light{
+  color:rgba(59,35,20,.5);
+  background:
+    repeating-linear-gradient(-45deg, rgba(59,35,20,.05) 0 12px, transparent 12px 24px),
+    var(--cream-d);
+  border-color:rgba(59,35,20,.22);
+}
+.ph[hidden]{display:none}
+
+/* ---- Sektionshoved ---- */
+.section-head{max-width:56ch;margin-bottom:44px}
+.section-head p{color:var(--muted);font-size:1.06rem;margin:14px 0 0}
+
+/* ---- Menu-uddrag på forsiden ---- */
+.menu{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);counter-reset:item}
+.item{background:var(--cream);padding:30px 28px;counter-increment:item}
+/* Numrene tælles af CSS. Sletter du et punkt, renummererer resten sig selv. */
+.item::before{
+  content:counter(item,decimal-leading-zero);
+  font-family:var(--serif);font-size:.9rem;color:var(--gold);
+  display:block;margin-bottom:10px;
+}
+.item h3{margin-bottom:8px}
+.item p{color:var(--muted);font-size:.97rem;margin:0}
+.menu-more{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+
+/* ---- Menukort ---- */
+.cat{margin-bottom:56px}
+.cat:last-child{margin-bottom:0}
+.cat > h2{
+  padding-bottom:14px;border-bottom:2px solid var(--ink);
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.cat > p{color:var(--muted);margin:16px 0 0;max-width:60ch}
+.rows{margin-top:12px}
+.row{
+  display:flex;align-items:baseline;gap:14px;
+  padding:18px 0;border-bottom:1px solid var(--line);
+}
+.row:last-child{border-bottom:0}
+.row-main{flex:1;min-width:0}
+.row-main h3{font-size:1.08rem}
+.row-main p{color:var(--muted);font-size:.95rem;margin:5px 0 0}
+/* Prikkerne og prisen forsvinder helt, hvis prisfeltet er tomt.
+   Så ser siden aldrig i stykker ud, før priserne er skrevet ind. */
+.price{
+  font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;
+  position:relative;padding-left:26px;
+}
+.price::before{
+  content:"";position:absolute;left:0;right:100%;bottom:.32em;
+  width:18px;border-bottom:2px dotted var(--line);
+}
+.price:empty{display:none}
+
+/* Tom kategori: viser en diskret note i stedet for ingenting */
+.rows:empty::after{
+  content:attr(data-empty);
+  display:block;padding:18px 0;color:var(--muted);font-style:italic;font-size:.95rem;
+}
+
+/* ---- Galleri ----
+   Kvadratisk, fordi billederne er en blanding af stående og
+   liggende. Kvadratet beskærer mindst muligt af begge dele. */
+.gallery{display:grid;grid-template-columns:1fr;gap:14px;margin-top:44px}
+.shot{position:relative;aspect-ratio:1/1;background-size:cover;background-position:center;background-color:var(--cream-d)}
+.shot.a{background-image:var(--img-plate1);background-position:center 58%}
+.shot.b{background-image:var(--img-plate2)}
+.shot.c{background-image:var(--img-inside);background-position:38% center}
+
+/* ---- Billedstribe på menukortet ---- */
+.strip{display:grid;grid-template-columns:1fr;gap:14px;margin:0 0 60px}
+.strip div{aspect-ratio:1/1;background-size:cover;background-position:center;background-color:var(--cream-d)}
+.strip .s1{background-image:var(--img-vaffel);background-position:center 45%}
+.strip .s2{background-image:var(--img-kaffe);background-position:center 55%}
+.strip .s3{background-image:var(--img-choko)}
+
+
+/* ---- Historien ---- */
+.story{background:var(--cocoa);color:var(--cream);position:relative;overflow:hidden}
+.story h2{color:var(--cream)}
+.story-grid{display:grid;grid-template-columns:1fr;gap:40px;position:relative;z-index:2}
+.story-text p{color:rgba(245,239,230,.82)}
+.quote{
+  font-family:var(--serif);font-size:1.3rem;line-height:1.5;
+  color:var(--gold-l);border-left:2px solid var(--gold);
+  padding-left:22px;margin:28px 0 0;
+}
+.quote cite{
+  display:block;font-family:var(--sans);font-style:normal;
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(245,239,230,.5);margin-top:12px;
+}
+.story-img{
+  position:relative;aspect-ratio:3/4;min-height:280px;
+  background-image:var(--img-team);background-size:cover;background-position:center;
+  background-color:#1B0D06;
+}
+
+/* ---- Besøg os ---- */
+.visit-grid{display:grid;grid-template-columns:1fr;gap:38px}
+.facts{border-top:2px solid var(--ink)}
+.fact{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.fact dt{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact dd{margin:0;font-size:1.04rem}
+.fact dd a{text-decoration:none;border-bottom:1.5px solid var(--gold)}
+.fact dd a:hover{background:rgba(176,141,87,.16)}
+.hours{margin:0;font-variant-numeric:tabular-nums}
+.hours div{display:flex;justify-content:space-between;gap:20px;padding:9px 0;border-bottom:1px solid var(--line);max-width:330px}
+.hours div:last-child{border-bottom:0}
+.hours span:first-child{color:var(--muted)}
+.hours .shut{color:var(--muted)}
+/* Dagens åbningstid fremhæves af sprog.js */
+.hours .today{font-weight:700}
+.hours .today span:first-child{color:var(--ink)}
+.hours .today span:last-child{
+  background:rgba(176,141,87,.22);
+  padding:1px 8px;margin:-1px -8px;border-radius:3px;
+}
+.visit-img{position:relative;aspect-ratio:1/1;background-image:var(--img-visit);background-size:cover;background-position:center;background-color:var(--cream-d)}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.badge{
+  font-size:.82rem;font-weight:600;padding:8px 15px;
+  border:1.5px solid var(--line);border-radius:999px;
+  text-decoration:none;color:var(--muted);transition:.18s;
+}
+.badge:hover{border-color:var(--gold);color:var(--ink)}
+.visit-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+/* ---- Anmeldelser ---- */
+.reviews{background:var(--cream-d)}
+.rating{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  margin:0 0 6px;
+}
+.rating .score{font-family:var(--serif);font-size:3rem;line-height:1;color:var(--ink)}
+.stars{color:var(--gold);font-size:1.2rem;letter-spacing:.12em}
+.rating .count{color:var(--muted);font-size:.98rem}
+.rating .count a{border-bottom:1.5px solid var(--gold);text-decoration:none}
+.review-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:38px}
+.review{background:var(--cream);padding:28px 26px;display:flex;flex-direction:column}
+.review .stars{font-size:.95rem;margin-bottom:14px}
+.review blockquote{
+  font-family:var(--serif);font-size:1.08rem;line-height:1.55;
+  margin:0 0 18px;flex:1;
+}
+.review footer{
+  background:none;color:var(--muted);padding:0;font-size:.82rem;
+  display:block;
+}
+.review footer b{color:var(--ink);font-weight:600}
+
+/* ---- Footer ---- */
+footer{background:var(--cocoa-d);color:rgba(245,239,230,.6);padding:44px 0 100px;font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer a{color:rgba(245,239,230,.6)}
+
+/* ---- Sticky ring-bar på mobil ---- */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  display:flex;border-top:1px solid rgba(245,239,230,.2);
+}
+.callbar a{
+  flex:1;text-align:center;text-decoration:none;
+  padding:16px 8px;font-size:1rem;font-weight:700;
+}
+.callbar .call{background:var(--gold);color:var(--cocoa-d)}
+.callbar .map{background:var(--cocoa-d);color:var(--cream)}
+
+/* ---- Desktop ---- */
+@media (min-width:760px){
+  section{padding:104px 0}
+  .pagehead{padding:86px 0 78px}
+  .menu{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:repeat(3,1fr)}
+  .strip{grid-template-columns:repeat(3,1fr)}
+  .review-grid{grid-template-columns:repeat(3,1fr)}
+  .visit-grid{grid-template-columns:1.25fr 1fr;gap:56px;align-items:start}
+  .price{padding-left:44px}
+  .price::before{width:36px}
+}
+@media (min-width:980px){
+  .hero-grid{grid-template-columns:1.08fr .92fr;align-items:stretch}
+  .hero-copy{padding:112px 0 116px}
+  .hero-img{min-height:560px}
+  .story-grid{grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+  .menu{grid-template-columns:repeat(3,1fr)}
+  .callbar{display:none}
+  footer{padding-bottom:44px}
+}
+
+/* Meget små telefoner: giv navigationen plads */
+@media (max-width:430px){
+  .brand{font-size:1.3rem}
+  .nav a{padding:6px 10px;font-size:.82rem}
+  .langs button{padding:5px 8px;font-size:.72rem}
+}
+
+/* ---- Tilgængelighed ---- */
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}

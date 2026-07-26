@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChokoGlade — Italiensk café i Ribe | Antipasti, aperitivo og kaffe</title>
+<meta name="description" content="Italiensk café på Nederdammen 32 i Ribe. Antipasti, aperitivo, illy-kaffe og chokolade fra Piemonte. Drevet af Giacomo og Eleonora, der flyttede fra Milano til Ribe.">
+
+<!--
+  ============================================================
+  CHOKOGLADE — index.html
+  Én fil. Ingen build, ingen framework, ingen eksterne kald.
+  Bare læg filen på en webserver.
+
+  ------------------------------------------------------------
+  SÅDAN SKIFTER DU BILLEDER IND
+  ------------------------------------------------------------
+  Læg billedfilerne i en mappe der hedder "billeder" ved siden
+  af denne fil. Find så blokken :root { --img-... } nedenfor og
+  udskift none med url("billeder/filnavn.jpg").
+
+  Eksempel:
+     --img-facade: url("billeder/facade.jpg");
+
+  Der er 6 pladser. Se billeder-guide.md for hvad hver enkelt
+  skal forestille og hvilket format den skal have.
+
+  ------------------------------------------------------------
+  SKAL BEKRÆFTES FØR SIDEN GÅR LIVE
+  ------------------------------------------------------------
+  1. ÅBNINGSTIDER. Tiderne nedenfor stammer fra Ryk Ind Ribes
+     åbningsartikel, 23. april 2024. De er sandsynligvis
+     forældede nu hvor der er køkken og servering.
+     Søg efter data-check="aabningstider" og ret dem.
+
+  2. GELATO. Fremgår af deres skiltevogn på gågaden, ikke af
+     nogen skriftlig kilde. Søg efter data-check="gelato".
+     Slet blokken hvis de ikke sælger is.
+
+  3. WOLT. De har en Wolt-side, men det er ikke bekræftet at
+     den er aktiv. Søg efter data-check="wolt".
+
+  Alt andet på siden er verificeret mod kilder.
+  ============================================================
+-->
+
+<style>
+:root{
+  /* ---- BILLEDER: udskift none med url("billeder/...") ---- */
+  --img-facade:  none;   /* Facade fra brostensgaden */
+  --img-plate1:  none;   /* Antipasti-tallerken, tæt på */
+  --img-plate2:  none;   /* Antipasti udendørs m. vin og Peroni */
+  --img-team:    none;   /* Giacomo og Eleonora / personalet */
+  --img-street:  none;   /* Gågaden med skiltevognen */
+  --img-inside:  none;   /* Interiør */
+
+  /* ---- Farver ---- */
+  --cocoa:   #3B2314;
+  --cocoa-d: #241109;
+  --cream:   #F5EFE6;
+  --cream-d: #EAE0D2;
+  --gold:    #B08D57;
+  --gold-l:  #C9A870;
+  --ink:     #2A1810;
+  --muted:   #6E5646;
+  --line:    rgba(59,35,20,.14);
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --wrap: 1080px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.65;
+  color:var(--ink);
+  background:var(--cream);
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.15;margin:0}
+h1{font-size:clamp(2.5rem,7vw,4.4rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.75rem,4.2vw,2.6rem)}
+h3{font-size:1.2rem}
+p{margin:0 0 1rem}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+section{padding:76px 0}
+
+/* ---- Chokoladeplade-tekstur ---- */
+/* Rudemønsteret fra en brækket chokoladeplade. Meget lav kontrast
+   — det skal føles som en overflade, ikke ses som et mønster. */
+.bar-texture{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,.07) 1px, transparent 1px);
+  background-size:74px 74px;
+  opacity:.5;
+}
+.bar-texture.on-light{
+  background-image:
+    linear-gradient(90deg, rgba(59,35,20,.05) 1px, transparent 1px),
+    linear-gradient(rgba(59,35,20,.05) 1px, transparent 1px);
+}
+
+/* ---- Topbar ---- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(36,17,9,.94);
+  backdrop-filter:saturate(150%) blur(8px);
+  border-bottom:1px solid rgba(176,141,87,.28);
+}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:11px;padding-bottom:11px}
+.brand{font-family:var(--serif);color:var(--cream);font-size:1.22rem;letter-spacing:.02em;text-decoration:none}
+.brand b{color:var(--gold-l);font-weight:400}
+.langs{display:flex;gap:2px;background:rgba(245,239,230,.09);border-radius:999px;padding:3px}
+.langs button{
+  font:inherit;font-size:.76rem;font-weight:600;letter-spacing:.06em;
+  border:0;background:transparent;color:rgba(245,239,230,.62);
+  padding:5px 11px;border-radius:999px;cursor:pointer;transition:.18s;
+}
+.langs button:hover{color:var(--cream)}
+.langs button[aria-pressed="true"]{background:var(--gold);color:var(--cocoa-d)}
+
+/* ---- Knapper ---- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:1rem;font-weight:600;text-decoration:none;
+  padding:15px 28px;border-radius:3px;border:1.5px solid transparent;
+  transition:.18s;white-space:nowrap;
+}
+.btn-gold{background:var(--gold);color:var(--cocoa-d)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{border-color:rgba(245,239,230,.45);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--cream);background:rgba(245,239,230,.09)}
+.btn-dark{background:var(--cocoa);color:var(--cream)}
+.btn-dark:hover{background:var(--cocoa-d)}
+
+/* ---- Hero ---- */
+.hero{position:relative;background:var(--cocoa-d);color:var(--cream);overflow:hidden;padding:0}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:0}
+.hero-copy{padding:64px 0 68px;position:relative;z-index:2}
+.hero h1{color:var(--cream)}
+.hero h1 em{font-style:normal;color:var(--gold-l)}
+.kicker{
+  font-size:.78rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--gold-l);margin:0 0 20px;
+}
+.hero-lede{font-size:1.16rem;color:rgba(245,239,230,.82);max-width:46ch;margin:22px 0 34px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-img{
+  position:relative;min-height:300px;
+  background-color:#1B0D06;
+  background-image:var(--img-facade);
+  background-size:cover;background-position:center;
+}
+
+/* ---- Billed-placeholder ---- */
+.ph{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:20px;
+  font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(176,141,87,.85);
+  background:
+    repeating-linear-gradient(-45deg, rgba(176,141,87,.07) 0 12px, transparent 12px 24px),
+    #241109;
+  border:1px dashed rgba(176,141,87,.4);
+}
+.ph.light{color:rgba(59,35,20,.5);background:
+    repeating-linear-gradient(-45deg, rgba(59,35,20,.05) 0 12px, transparent 12px 24px),
+    var(--cream-d);
+  border-color:rgba(59,35,20,.22);}
+/* Placeholderen skjules af scriptet nederst, når billedet er sat ind */
+.ph[hidden]{display:none}
+
+/* ---- Menu ---- */
+.section-head{max-width:56ch;margin-bottom:44px}
+.section-head p{color:var(--muted);font-size:1.06rem;margin:14px 0 0}
+.menu{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);counter-reset:item}
+.item{background:var(--cream);padding:30px 28px;counter-increment:item}
+/* Numrene tælles af CSS. Sletter du et menupunkt, renummererer resten sig selv. */
+.item::before{
+  content:counter(item,decimal-leading-zero);
+  font-family:var(--serif);font-size:.9rem;color:var(--gold);
+  display:block;margin-bottom:10px;
+}
+.item h3{margin-bottom:8px}
+.item p{color:var(--muted);font-size:.97rem;margin:0}
+
+/* ---- Galleri ---- */
+.gallery{display:grid;grid-template-columns:1fr;gap:14px;margin-top:44px}
+.shot{position:relative;aspect-ratio:4/3;background-size:cover;background-position:center;background-color:var(--cream-d)}
+.shot.a{background-image:var(--img-plate1)}
+.shot.b{background-image:var(--img-plate2)}
+.shot.c{background-image:var(--img-inside)}
+
+/* ---- Historien ---- */
+.story{background:var(--cocoa);color:var(--cream);position:relative;overflow:hidden}
+.story h2{color:var(--cream)}
+.story .section-head p{color:rgba(245,239,230,.72)}
+.story-grid{display:grid;grid-template-columns:1fr;gap:40px;position:relative;z-index:2}
+.story-text p{color:rgba(245,239,230,.82)}
+.quote{
+  font-family:var(--serif);font-size:1.3rem;line-height:1.5;
+  color:var(--gold-l);border-left:2px solid var(--gold);
+  padding-left:22px;margin:28px 0 0;
+}
+.quote cite{
+  display:block;font-family:var(--sans);font-style:normal;
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(245,239,230,.5);margin-top:12px;
+}
+.story-img{
+  position:relative;aspect-ratio:3/4;min-height:280px;
+  background-image:var(--img-team);background-size:cover;background-position:center;
+  background-color:#1B0D06;
+}
+
+/* ---- Besøg os ---- */
+.visit-grid{display:grid;grid-template-columns:1fr;gap:38px}
+.facts{border-top:2px solid var(--ink)}
+.fact{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.fact dt{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact dd{margin:0;font-size:1.04rem}
+.fact dd a{text-decoration:none;border-bottom:1.5px solid var(--gold)}
+.fact dd a:hover{background:rgba(176,141,87,.16)}
+.hours{margin:0;font-variant-numeric:tabular-nums}
+.hours div{display:flex;justify-content:space-between;gap:20px;padding:9px 0;border-bottom:1px solid var(--line);max-width:330px}
+.hours div:last-child{border-bottom:0}
+.hours span:first-child{color:var(--muted)}
+.hours .shut{color:var(--muted)}
+.visit-img{position:relative;aspect-ratio:1/1;background-image:var(--img-street);background-size:cover;background-position:center;background-color:var(--cream-d)}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.badge{
+  font-size:.82rem;font-weight:600;padding:8px 15px;
+  border:1.5px solid var(--line);border-radius:999px;
+  text-decoration:none;color:var(--muted);transition:.18s;
+}
+.badge:hover{border-color:var(--gold);color:var(--ink)}
+.visit-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+/* ---- Footer ---- */
+footer{background:var(--cocoa-d);color:rgba(245,239,230,.6);padding:44px 0 100px;font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+footer a{color:rgba(245,239,230,.6)}
+
+/* ---- Sticky ring-bar på mobil ---- */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  display:flex;border-top:1px solid rgba(245,239,230,.2);
+}
+.callbar a{
+  flex:1;text-align:center;text-decoration:none;
+  padding:16px 8px;font-size:1rem;font-weight:700;
+}
+.callbar .call{background:var(--gold);color:var(--cocoa-d)}
+.callbar .map{background:var(--cocoa-d);color:var(--cream)}
+
+/* ---- Desktop ---- */
+@media (min-width:760px){
+  section{padding:104px 0}
+  .menu{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:repeat(3,1fr)}
+  .visit-grid{grid-template-columns:1.25fr 1fr;gap:56px;align-items:start}
+}
+@media (min-width:980px){
+  .hero-grid{grid-template-columns:1.08fr .92fr;align-items:stretch}
+  .hero-copy{padding:112px 0 116px}
+  .hero-img{min-height:560px}
+  .story-grid{grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
+  .menu{grid-template-columns:repeat(3,1fr)}
+  .callbar{display:none}
+  footer{padding-bottom:44px}
+}
+
+/* ---- Tilgængelighed ---- */
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Choko<b>Glade</b></a>
+    <nav class="langs" aria-label="Sprog / Language / Sprache">
+      <button type="button" data-lang="da" aria-pressed="true">DA</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="bar-texture"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker" data-t="hero.kicker"></p>
+          <h1 data-t="hero.title" data-html></h1>
+          <p class="hero-lede" data-t="hero.lede"></p>
+          <div class="hero-cta">
+            <a class="btn btn-gold" href="tel:+4591811859">
+              <span data-t="cta.call"></span>
+            </a>
+            <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener">
+              <span data-t="cta.route"></span>
+            </a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <div class="ph">Billede: facade</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MENU ===================== -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-t="menu.title"></h2>
+        <p data-t="menu.lede"></p>
+      </div>
+
+      <div class="menu">
+        <div class="item">
+          <span class="num">01</span>
+          <h3 data-t="menu.1.h"></h3>
+          <p data-t="menu.1.p"></p>
+        </div>
+        <div class="item">
+          <span class="num">02</span>
+          <h3 data-t="menu.2.h"></h3>
+          <p data-t="menu.2.p"></p>
+        </div>
+        <div class="item">
+          <span class="num">03</span>
+          <h3 data-t="menu.3.h"></h3>
+          <p data-t="menu.3.p"></p>
+        </div>
+        <!-- Gelato: fremgår kun af skiltevognen. Slet denne blok hvis den ikke holder. -->
+        <div class="item" data-check="gelato">
+          <span class="num">04</span>
+          <h3 data-t="menu.4.h"></h3>
+          <p data-t="menu.4.p"></p>
+        </div>
+        <div class="item">
+          <span class="num">05</span>
+          <h3 data-t="menu.5.h"></h3>
+          <p data-t="menu.5.p"></p>
+        </div>
+        <div class="item">
+          <span class="num">06</span>
+          <h3 data-t="menu.6.h"></h3>
+          <p data-t="menu.6.p"></p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="shot a"><div class="ph light">Billede: antipasti-tallerken</div></div>
+        <div class="shot b"><div class="ph light">Billede: antipasti udendørs</div></div>
+        <div class="shot c"><div class="ph light">Billede: interiør</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HISTORIEN ===================== -->
+  <section class="story" id="historien">
+    <div class="bar-texture"></div>
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-text">
+          <p class="kicker" data-t="story.kicker"></p>
+          <h2 data-t="story.title"></h2>
+          <p style="margin-top:24px" data-t="story.p1"></p>
+          <p data-t="story.p2"></p>
+          <blockquote class="quote">
+            <span data-t="story.quote"></span>
+            <cite>Giacomo Montemagno</cite>
+          </blockquote>
+        </div>
+        <div class="story-img">
+          <div class="ph">Billede: Giacomo &amp; Eleonora</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BESØG OS ===================== -->
+  <section id="besoeg">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-t="visit.title"></h2>
+        <p data-t="visit.lede"></p>
+      </div>
+
+      <div class="visit-grid">
+        <div>
+          <dl class="facts">
+            <div class="fact">
+              <dt data-t="visit.addr"></dt>
+              <dd>Nederdammen 32A, st. tv.<br>6760 Ribe</dd>
+            </div>
+            <div class="fact">
+              <dt data-t="visit.phone"></dt>
+              <dd><a href="tel:+4591811859">91 81 18 59</a></dd>
+            </div>
+            <div class="fact">
+              <dt data-t="visit.mail"></dt>
+              <dd><a href="mailto:4fooldogs@gmail.com">4fooldogs@gmail.com</a></dd>
+            </div>
+            <div class="fact">
+              <dt data-t="visit.hours"></dt>
+              <dd>
+                <!-- BEKRÆFT DISSE. Kilde: Ryk Ind Ribe, 23. april 2024. -->
+                <div class="hours" data-check="aabningstider">
+                  <div><span data-t="visit.weekdays"></span> <span>10.00 – 17.00</span></div>
+                  <div><span data-t="visit.sat"></span> <span>10.00 – 14.00</span></div>
+                  <div><span data-t="visit.sun"></span> <span class="shut" data-t="visit.closed"></span></div>
+                </div>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="badges">
+            <span class="badge" data-t="visit.giftcard"></span>
+            <a class="badge" href="https://www.instagram.com/chokoglade_ribe/" target="_blank" rel="noopener">Instagram</a>
+            <a class="badge" href="https://www.facebook.com/p/ChokoGlade-Ribe-61567615954738/" target="_blank" rel="noopener">Facebook</a>
+            <a class="badge" data-check="wolt" href="https://wolt.com/da/dnk/ribe/venue/chokoglade" target="_blank" rel="noopener">Wolt</a>
+          </div>
+
+          <div class="visit-cta">
+            <a class="btn btn-dark" href="tel:+4591811859"><span data-t="cta.call"></span></a>
+            <a class="btn btn-dark" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener"><span data-t="cta.route"></span></a>
+          </div>
+        </div>
+
+        <div class="visit-img"><div class="ph light">Billede: gågaden</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ChokoGlade · Nederdammen 32A, 6760 Ribe · CVR 44468840</span>
+    <a href="tel:+4591811859">91 81 18 59</a>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="call" href="tel:+4591811859" data-t="cta.callShort"></a>
+  <a class="map" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.routeShort"></a>
+</div>
+
+<script>
+/* ============================================================
+   SPROG
+   Tre sprog i ét objekt. Vil du rette en tekst, så ret den her
+   — ikke i HTML'en. Alle tre skal rettes samtidigt.
+   ============================================================ */
+const T = {
+
+  da: {
+    "hero.kicker": "Italiensk café · Nederdammen 32, Ribe",
+    "hero.title": "Et stykke Italien<br>midt i <em>Ribe</em>",
+    "hero.lede": "Antipasti, aperitivo og italiensk kaffe. Drevet af Giacomo og Eleonora, der solgte huset i Milano og flyttede hertil.",
+    "cta.call": "Ring 91 81 18 59",
+    "cta.route": "Find vej",
+    "cta.callShort": "Ring",
+    "cta.routeShort": "Find vej",
+
+    "menu.title": "Det serverer vi",
+    "menu.lede": "Italiensk mad og drikke, lavet af italienere. Kom ind og se dagens udvalg — vi står i butikken hele dagen.",
+    "menu.1.h": "Antipasti-tallerkener",
+    "menu.1.p": "Italiensk pålæg, oste, oliven og friske råvarer, anrettet på træbræt. Til at dele eller spise alene.",
+    "menu.2.h": "Aperitivo",
+    "menu.2.p": "Aperol Spritz, Campari, italiensk vin og Peroni. Den italienske eftermiddag, som den skal være.",
+    "menu.3.h": "Kaffe",
+    "menu.3.p": "Espresso, cappuccino og macchiato på illy-kaffe. Drikkes stående ved disken eller siddende ved bordet.",
+    "menu.4.h": "Gelato",
+    "menu.4.p": "Italiensk is. Kig efter skiltet uden for døren på gågaden.",
+    "menu.5.h": "Chokolade fra Piemonte",
+    "menu.5.p": "Gianduiotti, cremini og 100% criollo-kakao. Det var her det hele startede, og hylderne står der stadig.",
+    "menu.6.h": "Til at tage med",
+    "menu.6.p": "Antipasti pakket til afhentning. Ring i forvejen, så står det klar.",
+
+    "story.kicker": "Bag disken",
+    "story.title": "Fra Milano til Ribe",
+    "story.p1": "Giacomo Montemagno og Eleonora Dovera boede i Milano med AC Milans stadion i nabolaget. Hun var regnskabschef, han var læge. De havde besøgt Ribe som turister, faldt for byen og vikingehistorien — og besluttede sig.",
+    "story.p2": "De solgte huset, sagde jobbene op og åbnede butikken på Nederdammen den 23. april 2024. I dag bor de i Øster Vedsted, og du møder dem selv, når du kommer ind ad døren.",
+    "story.quote": "Gågaden er hyggelig, ikke tomme butikker som i gågaden i Esbjerg.",
+
+    "visit.title": "Besøg os",
+    "visit.lede": "Vi ligger midt på gågaden i Ribe, to minutters gang fra Domkirken.",
+    "visit.addr": "Adresse",
+    "visit.phone": "Telefon",
+    "visit.mail": "E-mail",
+    "visit.hours": "Åbningstider",
+    "visit.weekdays": "Mandag – fredag",
+    "visit.sat": "Lørdag",
+    "visit.sun": "Søndag",
+    "visit.closed": "Lukket",
+    "visit.giftcard": "Vi modtager Ribe Gavekort"
+  },
+
+  en: {
+    "hero.kicker": "Italian café · Nederdammen 32, Ribe",
+    "hero.title": "A piece of Italy<br>in the heart of <em>Ribe</em>",
+    "hero.lede": "Antipasti, aperitivo and Italian coffee. Run by Giacomo and Eleonora, who sold their house in Milan and moved here.",
+    "cta.call": "Call +45 91 81 18 59",
+    "cta.route": "Get directions",
+    "cta.callShort": "Call",
+    "cta.routeShort": "Directions",
+
+    "menu.title": "What we serve",
+    "menu.lede": "Italian food and drink, made by Italians. Come in and see what we have today — we are in the shop all day.",
+    "menu.1.h": "Antipasti boards",
+    "menu.1.p": "Italian cured meats, cheeses, olives and fresh produce on a wooden board. To share, or to keep to yourself.",
+    "menu.2.h": "Aperitivo",
+    "menu.2.p": "Aperol Spritz, Campari, Italian wine and Peroni. The Italian afternoon, done properly.",
+    "menu.3.h": "Coffee",
+    "menu.3.p": "Espresso, cappuccino and macchiato, made with illy coffee. Standing at the counter or sitting at a table.",
+    "menu.4.h": "Gelato",
+    "menu.4.p": "Italian ice cream. Look for the sign outside on the pedestrian street.",
+    "menu.5.h": "Chocolate from Piedmont",
+    "menu.5.p": "Gianduiotti, cremini and 100% criollo cocoa. This is where it all began, and the shelves are still here.",
+    "menu.6.h": "Takeaway",
+    "menu.6.p": "Antipasti packed to go. Call ahead and we will have it ready.",
+
+    "story.kicker": "Behind the counter",
+    "story.title": "From Milan to Ribe",
+    "story.p1": "Giacomo Montemagno and Eleonora Dovera lived in Milan, with the AC Milan stadium in the neighbourhood. She was head of accounting, he was a doctor. They had visited Ribe as tourists, fell for the town and its Viking history — and made up their minds.",
+    "story.p2": "They sold the house, resigned from their jobs, and opened the shop on Nederdammen on 23 April 2024. Today they live in Øster Vedsted, and they are the ones who greet you at the door.",
+    "story.quote": "The pedestrian street here is charming — no empty shops like in Esbjerg.",
+
+    "visit.title": "Visit us",
+    "visit.lede": "We are on the pedestrian street in Ribe, a two-minute walk from the Cathedral.",
+    "visit.addr": "Address",
+    "visit.phone": "Phone",
+    "visit.mail": "Email",
+    "visit.hours": "Opening hours",
+    "visit.weekdays": "Monday – Friday",
+    "visit.sat": "Saturday",
+    "visit.sun": "Sunday",
+    "visit.closed": "Closed",
+    "visit.giftcard": "Ribe Gift Card accepted"
+  },
+
+  de: {
+    "hero.kicker": "Italienisches Café · Nederdammen 32, Ribe",
+    "hero.title": "Ein Stück Italien<br>mitten in <em>Ribe</em>",
+    "hero.lede": "Antipasti, Aperitivo und italienischer Kaffee. Geführt von Giacomo und Eleonora, die ihr Haus in Mailand verkauft haben und hierher gezogen sind.",
+    "cta.call": "Anrufen +45 91 81 18 59",
+    "cta.route": "Route planen",
+    "cta.callShort": "Anrufen",
+    "cta.routeShort": "Route",
+
+    "menu.title": "Was wir servieren",
+    "menu.lede": "Italienisches Essen und Trinken, von Italienern gemacht. Kommen Sie herein und sehen Sie, was es heute gibt — wir sind den ganzen Tag im Laden.",
+    "menu.1.h": "Antipasti-Platten",
+    "menu.1.p": "Italienische Wurstwaren, Käse, Oliven und frische Zutaten auf dem Holzbrett. Zum Teilen oder für sich allein.",
+    "menu.2.h": "Aperitivo",
+    "menu.2.p": "Aperol Spritz, Campari, italienischer Wein und Peroni. Der italienische Nachmittag, wie er sein soll.",
+    "menu.3.h": "Kaffee",
+    "menu.3.p": "Espresso, Cappuccino und Macchiato mit illy-Kaffee. Im Stehen an der Theke oder am Tisch.",
+    "menu.4.h": "Gelato",
+    "menu.4.p": "Italienisches Eis. Achten Sie auf das Schild vor der Tür in der Fußgängerzone.",
+    "menu.5.h": "Schokolade aus dem Piemont",
+    "menu.5.p": "Gianduiotti, Cremini und 100% Criollo-Kakao. Hier hat alles angefangen, und die Regale stehen noch immer.",
+    "menu.6.h": "Zum Mitnehmen",
+    "menu.6.p": "Antipasti zum Mitnehmen verpackt. Rufen Sie vorher an, dann steht alles bereit.",
+
+    "story.kicker": "Hinter der Theke",
+    "story.title": "Von Mailand nach Ribe",
+    "story.p1": "Giacomo Montemagno und Eleonora Dovera lebten in Mailand, mit dem Stadion des AC Mailand in der Nachbarschaft. Sie war Leiterin der Buchhaltung, er war Arzt. Sie hatten Ribe als Touristen besucht, verliebten sich in die Stadt und ihre Wikingergeschichte — und entschieden sich.",
+    "story.p2": "Sie verkauften das Haus, kündigten ihre Jobs und eröffneten am 23. April 2024 den Laden in der Nederdammen. Heute wohnen sie in Øster Vedsted, und sie begrüßen Sie selbst an der Tür.",
+    "story.quote": "Die Fußgängerzone hier ist gemütlich — keine leeren Läden wie in Esbjerg.",
+
+    "visit.title": "Besuchen Sie uns",
+    "visit.lede": "Wir liegen in der Fußgängerzone von Ribe, zwei Gehminuten vom Dom entfernt.",
+    "visit.addr": "Adresse",
+    "visit.phone": "Telefon",
+    "visit.mail": "E-Mail",
+    "visit.hours": "Öffnungszeiten",
+    "visit.weekdays": "Montag – Freitag",
+    "visit.sat": "Samstag",
+    "visit.sun": "Sonntag",
+    "visit.closed": "Geschlossen",
+    "visit.giftcard": "Ribe Gutschein wird akzeptiert"
+  }
+};
+
+const PAGE_TITLE = {
+  da: "ChokoGlade — Italiensk café i Ribe | Antipasti, aperitivo og kaffe",
+  en: "ChokoGlade — Italian café in Ribe | Antipasti, aperitivo and coffee",
+  de: "ChokoGlade — Italienisches Café in Ribe | Antipasti, Aperitivo und Kaffee"
+};
+
+function setLang(lang){
+  const dict = T[lang] || T.da;
+
+  document.querySelectorAll("[data-t]").forEach(el => {
+    const val = dict[el.dataset.t];
+    if (val === undefined) return;
+    if (el.hasAttribute("data-html")) el.innerHTML = val;
+    else el.textContent = val;
+  });
+
+  document.documentElement.lang = lang;
+  document.title = PAGE_TITLE[lang] || PAGE_TITLE.da;
+
+  document.querySelectorAll(".langs button").forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+  });
+
+  try { localStorage.setItem("cg-lang", lang); } catch(e) { /* privat browsing */ }
+}
+
+document.querySelectorAll(".langs button").forEach(b => {
+  b.addEventListener("click", () => setLang(b.dataset.lang));
+});
+
+/* Husk valget. Ellers: gæt ud fra browserens sprog. Ellers: dansk. */
+let start = "da";
+try {
+  const saved = localStorage.getItem("cg-lang");
+  if (saved && T[saved]) start = saved;
+  else {
+    const nav = (navigator.language || "da").slice(0,2).toLowerCase();
+    if (T[nav]) start = nav;
+  }
+} catch(e) {}
+
+setLang(start);
+
+/* ============================================================
+   BILLED-PLACEHOLDERE
+   Skjuler den stiplede placeholder automatisk, så snart der er
+   sat et rigtigt billede ind i :root-blokken. Du skal ikke røre
+   noget her — det klarer sig selv.
+   ============================================================ */
+document.querySelectorAll(".ph").forEach(ph => {
+  const bg = getComputedStyle(ph.parentElement).backgroundImage;
+  if (bg && bg !== "none") ph.hidden = true;
+});
+</script>
+
+</body>
+</html>

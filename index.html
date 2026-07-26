@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChokoGlade — Italiensk café i Ribe | Antipasti, vafler, kaffe og chokolade</title>
+<meta name="description" content="Italiensk café på Nederdammen 32 i Ribe. Antipasti, panini, vafler med gelato, italiensk vin, illy-kaffe og chokolade fra Domori og Venchi. Åbent alle dage. Drevet af Eleonora og Giacomo fra Milano.">
+<link rel="stylesheet" href="style.css">
+
+<!--
+  ============================================================
+  CHOKOGLADE — forside
+  ------------------------------------------------------------
+  Siden består af fire filer plus en billedmappe. Alt skal
+  ligge i samme mappe:
+
+     index.html      denne side
+     menukort.html   menukortet
+     style.css       alt design + hvilke billeder der bruges
+     sprog.js        ALLE tekster, på dansk, engelsk og tysk
+     billeder/       de ni billeder
+
+  Skal du rette en TEKST      -> sprog.js
+  Skal du skifte et BILLEDE   -> style.css, øverst
+  Skal du rette DESIGNET      -> style.css
+
+  ------------------------------------------------------------
+  KILDER
+  ------------------------------------------------------------
+  Åbningstider, anmeldelser og stjerner er hentet fra deres
+  Google Business-profil den 26. juli 2026. Ændrer de tiderne,
+  skal de rettes her OG på Google.
+
+  Historien om Milano kommer fra Ryk Ind Ribes artikel den
+  23. april 2024.
+
+  ------------------------------------------------------------
+  MANGLER STADIG
+  ------------------------------------------------------------
+  Priserne på menukortet. Se menukort.html.
+  ============================================================
+-->
+</head>
+
+<body data-page="forside">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">Choko<b>Glade</b></a>
+    <div class="topbar-right">
+      <nav class="nav">
+        <a href="menukort.html" data-t="nav.menu"></a>
+      </nav>
+      <nav class="langs" aria-label="Sprog / Language / Sprache">
+        <button type="button" data-lang="da" aria-pressed="true">DA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="bar-texture"></div>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker" data-t="hero.kicker"></p>
+          <h1 data-t="hero.title" data-html></h1>
+          <p class="hero-lede" data-t="hero.lede"></p>
+          <div class="hero-cta">
+            <a class="btn btn-gold" href="tel:+4591811859" data-t="cta.call"></a>
+            <a class="btn btn-ghost" href="menukort.html" data-t="cta.seeMenu"></a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <div class="ph">Billede: facade</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ UDDRAG AF MENUEN (hele kortet ligger i menukort.html) ============ -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-t="menu.title"></h2>
+        <p data-t="menu.lede"></p>
+      </div>
+
+      <div class="menu">
+        <div class="item">
+          <h3 data-t="menu.1.h"></h3>
+          <p data-t="menu.1.p"></p>
+        </div>
+        <div class="item">
+          <h3 data-t="menu.2.h"></h3>
+          <p data-t="menu.2.p"></p>
+        </div>
+        <div class="item">
+          <h3 data-t="menu.3.h"></h3>
+          <p data-t="menu.3.p"></p>
+        </div>
+      </div>
+
+      <div class="menu-more">
+        <a class="btn btn-dark" href="menukort.html" data-t="cta.seeMenu"></a>
+      </div>
+
+      <div class="gallery">
+        <div class="shot a"><div class="ph light">Billede: antipasti</div></div>
+        <div class="shot b"><div class="ph light">Billede: vafler</div></div>
+        <div class="shot c"><div class="ph light">Billede: interiør</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HISTORIEN ===================== -->
+  <section class="story" id="historien">
+    <div class="bar-texture"></div>
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-text">
+          <p class="kicker" data-t="story.kicker"></p>
+          <h2 data-t="story.title"></h2>
+          <p style="margin-top:24px" data-t="story.p1"></p>
+          <p data-t="story.p2"></p>
+          <blockquote class="quote">
+            <span data-t="story.quote"></span>
+            <cite>Giacomo Montemagno</cite>
+          </blockquote>
+        </div>
+        <div class="story-img">
+          <div class="ph">Billede: Eleonora &amp; Giacomo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ANMELDELSER =====================
+       Hentet fra Google Business og Facebook 26. juli 2026.
+       Citaterne står på dansk i alle tre sprogversioner — det
+       er rigtige gæsters ord, og dem oversætter vi ikke. -->
+  <section class="reviews" id="anmeldelser">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-t="rev.title"></h2>
+        <div class="rating">
+          <span class="score">4,7</span>
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span class="count">
+            <span data-t="rev.count"></span> ·
+            <a href="https://www.google.com/maps/place/ChokoGladE/@55.3296255,8.7656217,17z/data=!4m6!3m5!1s0x464b37e20651bedb:0x3443dafbaa7e926a!8m2!3d55.3296255!4d8.7656217!16s%2Fg%2F11vz7bs079" target="_blank" rel="noopener" data-t="rev.link"></a>
+          </span>
+        </div>
+        <p data-t="rev.orig"></p>
+      </div>
+
+      <div class="review-grid">
+        <div class="review">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <blockquote data-t="rev.1"></blockquote>
+          <footer><b data-t="rev.1n"></b> · <span data-t="rev.1w"></span></footer>
+        </div>
+        <div class="review">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <blockquote data-t="rev.2"></blockquote>
+          <footer><b data-t="rev.2n"></b> · <span data-t="rev.2w"></span></footer>
+        </div>
+        <div class="review">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <blockquote data-t="rev.3"></blockquote>
+          <footer><b data-t="rev.3n"></b> · <span data-t="rev.3w"></span></footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BESØG OS ===================== -->
+  <section id="besoeg">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-t="visit.title"></h2>
+        <p data-t="visit.lede"></p>
+      </div>
+
+      <div class="visit-grid">
+        <div>
+          <dl class="facts">
+            <div class="fact">
+              <dt data-t="visit.addr"></dt>
+              <dd>Nederdammen 32A, st. tv.<br>6760 Ribe</dd>
+            </div>
+            <div class="fact">
+              <dt data-t="visit.phone"></dt>
+              <dd><a href="tel:+4591811859">91 81 18 59</a></dd>
+            </div>
+            <div class="fact">
+              <dt data-t="visit.hours"></dt>
+              <dd>
+                <!-- Kilde: Google Business, 26. juli 2026.
+                     Dagens tid fremhæves automatisk af sprog.js. -->
+                <div class="hours">
+                  <div data-day="mon tue wed thu"><span data-t="visit.monthu"></span> <span>11.00 – 17.30</span></div>
+                  <div data-day="fri"><span data-t="visit.fri"></span> <span>12.00 – 19.30</span></div>
+                  <div data-day="sat"><span data-t="visit.sat"></span> <span>11.00 – 18.30</span></div>
+                  <div data-day="sun"><span data-t="visit.sun"></span> <span>11.00 – 17.00</span></div>
+                </div>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="badges">
+            <span class="badge" data-t="visit.giftcard"></span>
+            <a class="badge" href="https://www.instagram.com/chokoglade_ribe/" target="_blank" rel="noopener">Instagram</a>
+            <a class="badge" href="https://www.facebook.com/p/ChokoGlade-Ribe-61567615954738/" target="_blank" rel="noopener">Facebook</a>
+          </div>
+
+          <div class="visit-cta">
+            <a class="btn btn-dark" href="tel:+4591811859" data-t="cta.call"></a>
+            <a class="btn btn-dark" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.route"></a>
+          </div>
+        </div>
+
+        <div class="visit-img"><div class="ph light">Billede: facaden</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ChokoGlade · Nederdammen 32A, 6760 Ribe · CVR 44468840</span>
+    <a href="tel:+4591811859">91 81 18 59</a>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="call" href="tel:+4591811859" data-t="cta.callShort"></a>
+  <a class="map" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.routeShort"></a>
+</div>
+
+<script src="sprog.js"></script>
+</body>
+</html>

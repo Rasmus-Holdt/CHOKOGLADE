@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menukort — ChokoGlade, italiensk café i Ribe</title>
+<meta name="description" content="Menukort for ChokoGlade i Ribe: antipasti, panini, vafler med gelato, illy-kaffe, italiensk vin og chokolade fra Domori og Venchi. Nederdammen 32A, 6760 Ribe.">
+<link rel="stylesheet" href="style.css">
+
+<!--
+  ============================================================
+  CHOKOGLADE — menukort
+  ------------------------------------------------------------
+  SÅDAN SKRIVER DU EN PRIS IND
+
+  Find retten nedenfor og skriv prisen mellem de to price-tags:
+
+     <div class="price">65 kr.</div>
+
+  Så snart der står noget, dukker prikkerne og prisen op af sig
+  selv. Er feltet tomt, er begge dele usynlige. Siden ser altså
+  rigtig ud, også før priserne er der.
+
+  ------------------------------------------------------------
+  SÅDAN TILFØJER DU EN RET
+
+  Kopiér en hel row-blok og ret teksten:
+
+     <div class="row">
+       <div class="row-main">
+         <h3>Navnet på retten</h3>
+         <p>En kort beskrivelse. Må gerne udelades.</p>
+       </div>
+       <div class="price"></div>
+     </div>
+
+  Skriver du teksten direkte ind sådan her, står den kun på
+  dansk. Skal den også oversættes, så brug data-t og skriv
+  teksterne i sprog.js — se hvordan de andre linjer er sat op.
+
+  ------------------------------------------------------------
+  MANGLER STADIG: PRISERNE
+  ------------------------------------------------------------
+  Alle prisfelter er tomme — markeret med data-check="priser".
+
+  Der hænger et menuskilt i vinduet ("ChokoGladE Cafeteria")
+  med hele prislisten. Det ses på billedet billeder/facade-hero.jpg,
+  men er for sløret til at læse. Ét skarpt foto af det skilt,
+  så kan hele kortet fyldes ud på en halv time.
+
+  Antipasti og panini står desuden uden enkeltretter, fordi vi
+  ikke ved hvilke varianter de laver. De viser "Spørg i butikken"
+  indtil videre.
+
+  ------------------------------------------------------------
+  KILDER
+  ------------------------------------------------------------
+  Antipasti, panini, vafler, gelato, espresso, cappuccino, vin,
+  Peroni, Domori og Venchi er alle bekræftet på deres egne
+  billeder, Google-anmeldelser eller Googles menufotos.
+  Tartufi Domori er fremhævet som deres signaturret på Google.
+
+  Aperol Spritz er markeret data-check="aperol" — det stammer
+  fra et opslag på deres Facebook, ikke fra et billede af en
+  drink de har lavet.
+  ============================================================
+-->
+</head>
+
+<body data-page="menukort">
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="index.html">Choko<b>Glade</b></a>
+    <div class="topbar-right">
+      <nav class="nav">
+        <a href="index.html" data-t="nav.home"></a>
+      </nav>
+      <nav class="langs" aria-label="Sprog / Language / Sprache">
+        <button type="button" data-lang="da" aria-pressed="true">DA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="pagehead">
+    <div class="bar-texture"></div>
+    <div class="wrap">
+      <p class="kicker" data-t="hero.kicker"></p>
+      <h1 data-t="mk.title"></h1>
+      <p data-t="mk.lede"></p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+
+      <div class="strip">
+        <div class="s1"></div>
+        <div class="s2"></div>
+        <div class="s3"></div>
+      </div>
+
+      <!-- ---------------- ANTIPASTI ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.anti.h"></h2>
+        <p data-t="mk.anti.p"></p>
+        <!-- Tom indtil vi kender varianterne. Noten vises automatisk. -->
+        <div class="rows" data-check="priser" data-empty-key="mk.ask"></div>
+      </div>
+
+      <!-- ---------------- PANINI ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.panini.h"></h2>
+        <p data-t="mk.panini.p"></p>
+        <div class="rows" data-check="priser" data-empty-key="mk.ask"></div>
+      </div>
+
+      <!-- ---------------- VAFLER OG GELATO ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.vaffel.h"></h2>
+        <p data-t="mk.vaffel.p"></p>
+        <div class="rows" data-check="priser" data-empty-key="mk.ask"></div>
+      </div>
+
+      <!-- ---------------- KAFFE ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.kaffe.h"></h2>
+        <p data-t="mk.kaffe.p"></p>
+        <div class="rows">
+          <div class="row">
+            <div class="row-main"><h3 data-t="mk.kaffe.1"></h3></div>
+            <div class="price" data-check="priser"></div>
+          </div>
+          <div class="row">
+            <div class="row-main"><h3 data-t="mk.kaffe.2"></h3></div>
+            <div class="price" data-check="priser"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------------- VIN OG APERITIVO ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.vin.h"></h2>
+        <p data-t="mk.vin.p"></p>
+        <div class="rows">
+          <div class="row">
+            <div class="row-main">
+              <h3 data-t="mk.vin.1"></h3>
+              <p data-t="mk.vin.1p"></p>
+            </div>
+            <div class="price" data-check="priser"></div>
+          </div>
+          <div class="row">
+            <div class="row-main"><h3 data-t="mk.vin.2"></h3></div>
+            <div class="price" data-check="priser"></div>
+          </div>
+          <div class="row" data-check="aperol">
+            <div class="row-main"><h3 data-t="mk.vin.3"></h3></div>
+            <div class="price" data-check="priser"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------------- CHOKOLADE ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.choko.h"></h2>
+        <p data-t="mk.choko.p"></p>
+        <div class="rows">
+          <div class="row">
+            <div class="row-main">
+              <h3 data-t="mk.choko.1"></h3>
+              <p data-t="mk.choko.1p"></p>
+            </div>
+            <div class="price" data-check="priser"></div>
+          </div>
+          <div class="row">
+            <div class="row-main">
+              <h3 data-t="mk.choko.2"></h3>
+              <p data-t="mk.choko.2p"></p>
+            </div>
+            <div class="price" data-check="priser"></div>
+          </div>
+          <div class="row">
+            <div class="row-main">
+              <h3 data-t="mk.choko.3"></h3>
+              <p data-t="mk.choko.3p"></p>
+            </div>
+            <div class="price" data-check="priser"></div>
+          </div>
+          <div class="row">
+            <div class="row-main">
+              <h3 data-t="mk.choko.4"></h3>
+              <p data-t="mk.choko.4p"></p>
+            </div>
+            <div class="price" data-check="priser"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------------- TAKEAWAY ---------------- -->
+      <div class="cat">
+        <h2 data-t="mk.take.h"></h2>
+        <p data-t="mk.take.p"></p>
+      </div>
+
+      <p style="margin-top:52px;color:var(--muted);font-size:.95rem" data-t="mk.foot"></p>
+
+      <div class="visit-cta">
+        <a class="btn btn-dark" href="tel:+4591811859" data-t="cta.call"></a>
+        <a class="btn btn-dark" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.route"></a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ChokoGlade · Nederdammen 32A, 6760 Ribe · CVR 44468840</span>
+    <a href="tel:+4591811859">91 81 18 59</a>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="call" href="tel:+4591811859" data-t="cta.callShort"></a>
+  <a class="map" href="https://www.google.com/maps/dir/?api=1&destination=Nederdammen+32A,+6760+Ribe,+Danmark" target="_blank" rel="noopener" data-t="cta.routeShort"></a>
+</div>
+
+<script src="sprog.js"></script>
+</body>
+</html>
